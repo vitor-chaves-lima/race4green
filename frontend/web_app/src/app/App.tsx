@@ -1,11 +1,12 @@
+/*----------------- IMPORTS -----------------*/
+
+import { RouterProvider } from "react-router-dom";
+import { router } from "./router";
+
 /*--------------- COMPONENT -----------------*/
 
 const App = () => {
-	return (
-		<div>
-			<h1>Hello World</h1>
-		</div>
-	);
+	return <RouterProvider router={router} />;
 };
 
 /*----------------- EXPORTS -----------------*/
