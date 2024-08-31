@@ -2,12 +2,20 @@
 
 import { createBrowserRouter } from "react-router-dom";
 
+import DashboardLayout from "../layouts/Dashboard.layout";
+
 /*----------------- ROUTER -----------------*/
 
 const router = createBrowserRouter([
 	{
 		path: "/",
-		element: <div>Hello world!</div>,
+		element: <DashboardLayout />,
+		children: [
+			{
+				path: "integrations",
+				element: <h1>Integrações</h1>,
+			},
+		],
 	},
 ]);
 
