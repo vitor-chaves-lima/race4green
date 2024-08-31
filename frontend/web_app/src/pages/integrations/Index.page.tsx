@@ -42,9 +42,14 @@ const IntegrationListPlatformCard: React.FC<IntegrationListCardProps> = ({
 						</Button>
 					</Link>
 
-					<Button variant="default" className="text-lg rounded-xl">
-						Integrar
-					</Button>
+					<Link to={"/integrations/tiktok/manage"}>
+						<Button
+							variant="secondary"
+							className="w-full text-lg rounded-xl"
+						>
+							Gerenciar
+						</Button>
+					</Link>
 				</div>
 			</div>
 		</div>

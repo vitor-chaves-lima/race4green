@@ -4,7 +4,6 @@ import { RouteObject, createBrowserRouter } from "react-router-dom";
 import { icons } from "lucide-react";
 
 import { DashboardLayout } from "../layouts/Dashboard.layout";
-
 import { IntegrationsIndexPage } from "@/pages/integrations/Index.page";
 
 /*--------------- INTERFACES ----------------*/
