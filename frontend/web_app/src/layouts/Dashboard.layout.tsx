@@ -3,12 +3,12 @@
 import React from "react";
 
 import { Link, Outlet, useLocation } from "react-router-dom";
+import { MenuItem, menuItems } from "@/app/router";
 import { icons } from "lucide-react";
 
-interface NavMenuitemProps {
-	icon: keyof typeof icons;
-	label: string;
-	to: string;
+/*-------------- INTERFACES --------------*/
+
+interface NavMenuitemProps extends MenuItem {
 	selected: boolean;
 }
 
@@ -74,12 +74,15 @@ const NavMenu: React.FC = () => {
 	return (
 		<nav className="flex w-full">
 			<ul className="flex w-full flex-col items-start font-medium gap-3">
-				<NavMenuLink
-					icon={"Cable"}
-					label="Integrações"
-					to="/integrations"
-					selected={location.pathname === "/integrations"}
-				/>
+				{menuItems.map((item, i) => (
+					<NavMenuLink
+						key={i}
+						icon={item.icon}
+						label={item.label}
+						to={item.to}
+						selected={location.pathname === item.to}
+					/>
+				))}
 
 				<NavMenuAction
 					icon="LogOut"
