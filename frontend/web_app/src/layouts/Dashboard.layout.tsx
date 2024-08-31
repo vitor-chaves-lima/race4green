@@ -8,7 +8,7 @@ import { icons } from "lucide-react";
 
 /*-------------- INTERFACES --------------*/
 
-interface NavMenuitemProps extends MenuItem {
+interface NavMenuitemProps extends Omit<MenuItem, "selectCheck"> {
 	selected: boolean;
 }
 
@@ -80,7 +80,7 @@ const NavMenu: React.FC = () => {
 						icon={item.icon}
 						label={item.label}
 						to={item.to}
-						selected={location.pathname === item.to}
+						selected={item.selectCheck(location.pathname)}
 					/>
 				))}
 
@@ -98,8 +98,8 @@ const NavMenu: React.FC = () => {
 
 const DashboardLayout: React.FC = () => {
 	return (
-		<div className="flex w-full min-h-screen">
-			<div className="border-r w-24 lg:w-64 hidden sm:block">
+		<div className="grid min-h-screen w-full sm:grid-cols-[100px_1fr] lg:grid-cols-[280px_1fr]">
+			<div className="border-r hidden sm:block">
 				<div className="flex h-full max-h-screen flex-col gap-7 p-4 items-center lg:items-start">
 					<a href="/" className="font-bold text-2xl">
 						<span className="hidden lg:block pl-4">
@@ -110,15 +110,14 @@ const DashboardLayout: React.FC = () => {
 					<NavMenu />
 				</div>
 			</div>
-			<div className="flex flex-col">
-				<main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
-					<Outlet />
-				</main>
-			</div>
+
+			<main className="flex flex-1 flex-col p-4 lg:p-6">
+				<Outlet />
+			</main>
 		</div>
 	);
 };
 
 /*----------------- EXPORTS -----------------*/
 
-export default DashboardLayout;
+export { DashboardLayout };
