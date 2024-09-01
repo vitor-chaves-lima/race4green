@@ -12,5 +12,10 @@ api_router = APIRouter(prefix="/integrations")
                  )
 async def tiktok_integration_callback(token_repository: TokenRepository = Depends(get_token_repository)):
 
-	test_token = Token(user_id="test", value="AAA", expires_in=3600, token_type=TokenType.ACCESS)
-	token_repository.store(test_token)
+	# test_token = Token(user_id="test", value="AAA", expires_in=3600, token_type=TokenType.ACCESS)
+	# token_repository.store(test_token)
+
+	# test = token_repository.get_token("test", TokenType.ACCESS)
+	# _ = test
+
+	...
