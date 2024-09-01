@@ -24,7 +24,7 @@ class TikTokIntegrationUseCase:
 
 		refresh_token = Token(
 					user_id=user_id,
-					value=tiktok_token_response.refresh_tokene,
+					value=tiktok_token_response.refresh_token,
 					expires_in=tiktok_token_response.refresh_token_expires_in,
 					token_type=TokenType.REFRESH
 					)
