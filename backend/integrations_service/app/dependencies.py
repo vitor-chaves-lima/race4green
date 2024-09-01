@@ -13,4 +13,4 @@ tiktok_integration_usecase = TikTokIntegrationUseCase(token_repository, tiktok_i
 
 
 def get_tiktok_integration_usecase() -> TikTokIntegrationUseCase:
-	return get_tiktok_integration_usecase
+	return tiktok_integration_usecase
