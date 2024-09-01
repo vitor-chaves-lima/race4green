@@ -1,10 +1,7 @@
-from typing import Annotated
 from fastapi import APIRouter, Depends, Query, status
 
-from app.dependencies import get_tiktok_integration_service
-from core.services.tiktok_integration import TikTokIntegrationService
-from core.models.token import Token, TokenType
-from core.db.repositories.token import TokenRepository
+from app.dependencies import get_tiktok_integration_usecase
+from core.usecases.tiktok_integration import TikTokIntegrationUseCase
 
 api_router = APIRouter(prefix="/integrations")
 
@@ -13,15 +10,7 @@ api_router = APIRouter(prefix="/integrations")
                  tags=["TikTok"]
                  )
 async def tiktok_integration_callback(
-	tiktok_integration_service: TikTokIntegrationService = Depends(get_tiktok_integration_service),
+	tiktok_integration_usecase: TikTokIntegrationUseCase = Depends(get_tiktok_integration_usecase),
 	code: str = Query(alias="code", description="TikTok authorization code")):
 
-	test = tiktok_integration_service.get_token()
-	_ = test
-
-	# test_token = Token(user_id="test", value="AAA", expires_in=3600, token_type=TokenType.ACCESS)
-	# token_repository.store(test_token)
-
-	# test = token_repository.get_token("test", TokenType.ACCESS)
-	# _ = test
-	...
+	tiktok_integration_usecase.get_token(user_id="test", code=code)
