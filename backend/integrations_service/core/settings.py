@@ -1,10 +1,10 @@
 import os
-from pydantic import BaseModel
+from pydantic import BaseModel, RedisDsn
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class TikTokIntegrationSettings(BaseModel):
-	database_connection_string: str = os.getenv("DATABASE_CONNECTION_STRING")
+	database_connection_string: RedisDsn = os.getenv("DATABASE_CONNECTION_STRING")
 
 	token_uri: str = os.getenv("TIKTOK_TOKEN_URI")
 	redirect_uri: str = os.getenv("TIKTOK_REDIRECT_URI")

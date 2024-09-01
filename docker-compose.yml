@@ -1,12 +1,9 @@
 services:
   integrations_service_db:
-    image: mongo
+    image: redis
     restart: always
     ports:
-      - 5001:27017
-    volumes:
-      - ./docker_directories/integrations_service:/docker-entrypoint-initdb.d/
+      - 5001:6379
     environment:
-      MONGO_INITDB_ROOT_USERNAME: integrations_service_db
-      MONGO_INITDB_ROOT_PASSWORD: aRanDomPasSwORD
-      MONGO_INITDB_DATABASE: integrations
+      REDIS_PASSWORD: aRanDomPasSwORD
+    command: /bin/sh -c 'redis-server --appendonly yes --requirepass $${REDIS_PASSWORD}'
