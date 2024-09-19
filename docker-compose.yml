@@ -1,9 +1,14 @@
-version: '3.8'
-
 networks:
   app-network:
-    name: app-network
     driver: bridge
+
+  internal-network:
+    driver: bridge
+    internal: true
+
+  integrations-service-network:
+    driver: bridge
+    internal: true
 
 services:
   gateway-db:
@@ -20,7 +25,7 @@ services:
       timeout: 30s
       retries: 3
     networks:
-      - app-network
+      - internal-network
 
   gateway-migrations:
     image: kong:latest
@@ -33,9 +38,9 @@ services:
       KONG_PG_PASSWORD: kong
     command: "kong migrations bootstrap"
     networks:
-      - app-network
+      - internal-network
 
-  kong:
+  gateway:
     image: kong:latest
     depends_on:
       - gateway-db
@@ -59,7 +64,26 @@ services:
       - "8444:8444"
     restart: unless-stopped
     networks:
+      - internal-network
       - app-network
+
+  integrations-service-db:
+    image: redis:latest
+    networks:
+      - integrations-service-network
+    command: redis-server --requirepass redispass
+
+  integrations-service:
+    build:
+      context: ./backend/integrations_service
+      dockerfile: Dockerfile
+    depends_on:
+      - integrations-service-db
+    networks:
+      - integrations-service-network
+      - internal-network
+    environment:
+      DATABASE_CONNECTION_STRING: "redis://redispass@integrations-service-db"
 
 volumes:
   gateway-db-data:
