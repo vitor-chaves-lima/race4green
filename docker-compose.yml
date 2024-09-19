@@ -1,9 +1,66 @@
+version: '3.8'
+
+networks:
+  app-network:
+    name: app-network
+    driver: bridge
+
 services:
-  integrations_service_db:
-    image: redis
-    restart: always
-    ports:
-      - 5001:6379
+  gateway-db:
+    image: postgres:13
     environment:
-      REDIS_PASSWORD: aRanDomPasSwORD
-    command: /bin/sh -c 'redis-server --appendonly yes --requirepass $${REDIS_PASSWORD}'
+      POSTGRES_DB: kong
+      POSTGRES_USER: kong
+      POSTGRES_PASSWORD: kong
+    volumes:
+      - gateway-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-d", "kong", "-U", "kong" ]
+      interval: 5s
+      timeout: 30s
+      retries: 3
+    networks:
+      - app-network
+
+  gateway-migrations:
+    image: kong:latest
+    depends_on:
+      - gateway-db
+    environment:
+      KONG_DATABASE: postgres
+      KONG_PG_HOST: gateway-db
+      KONG_PG_USER: kong
+      KONG_PG_PASSWORD: kong
+    command: "kong migrations bootstrap"
+    networks:
+      - app-network
+
+  kong:
+    image: kong:latest
+    depends_on:
+      - gateway-db
+      - gateway-migrations
+    environment:
+      KONG_DATABASE: postgres
+      KONG_PG_HOST: gateway-db
+      KONG_PG_USER: kong
+      KONG_PG_PASSWORD: kong
+      KONG_PROXY_ACCESS_LOG: /dev/stdout
+      KONG_ADMIN_ACCESS_LOG: /dev/stdout
+      KONG_PROXY_ERROR_LOG: /dev/stderr
+      KONG_ADMIN_ERROR_LOG: /dev/stderr
+      KONG_ADMIN_LISTEN: 0.0.0.0:8001, 0.0.0.0:8444 ssl
+      KONG_ADMIN_GUI_URL: http://localhost:8002
+    ports:
+      - "8000:8000"
+      - "8443:8443"
+      - "8001:8001"
+      - "8002:8002"
+      - "8444:8444"
+    restart: unless-stopped
+    networks:
+      - app-network
+
+volumes:
+  gateway-db-data:
+  gateway-config:
