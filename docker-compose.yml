@@ -81,9 +81,14 @@ services:
       - integrations-service-db
     networks:
       - integrations-service-network
-      - internal-network
+      - app-network
     environment:
       DATABASE_CONNECTION_STRING: "redis://redispass@integrations-service-db"
+      TIKTOK_TOKEN_URI: https://www.tiktok.com/v2/auth/authorize/
+      TIKTOK_REDIRECT_URI: https://octopus-immense-truly.ngrok-free.app/integrations/tiktok/callback
+      TIKTOK_CLIENT_KEY: sbawgik9wknh769zea
+      TIKTOK_CLIENT_SECRET: ntnIeAlvnKPC6tTIXTQpsi4kws3D7ewv
+    command: "poetry run fastapi run app/main.py --port 80 --root-path /integrations"
 
 volumes:
   gateway-db-data:

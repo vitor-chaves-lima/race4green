@@ -1,6 +1,7 @@
 import requests
 from core.settings import TikTokIntegrationSettings
 from core.models.tiktok_integration import TokenRequest, TokenResponse
+from core.exceptions import TokenException
 
 
 class TikTokIntegrationService:
@@ -29,5 +30,9 @@ class TikTokIntegrationService:
 							data=request_data.model_dump())
 
 		response_data = response.json()
+
+		if "error" in response_data:
+			raise TokenException(response_data.get("error"), response_data.get("error_description"))
+
 		token_response = TokenResponse.from_dict(response_data)
 		return token_response
