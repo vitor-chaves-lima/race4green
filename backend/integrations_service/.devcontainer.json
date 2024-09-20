@@ -1,0 +1,15 @@
+{
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "integrations-service",
+	"workspaceFolder": "/usr/src",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-python.python"
+			],
+			"settings": {
+				"python.pythonPath": "/usr/local/bin/python"
+			}
+		}
+	}
+}

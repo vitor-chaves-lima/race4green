@@ -1,0 +1,18 @@
+services:
+  integrations-service-db:
+    image: redis:latest
+    command: redis-server --requirepass redispass
+
+  integrations-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - integrations-service-db
+    environment:
+      DATABASE_CONNECTION_STRING: "redis://redispass@integrations-service-db"
+      TIKTOK_TOKEN_URI: https://www.tiktok.com/v2/auth/authorize/
+      TIKTOK_REDIRECT_URI: https://octopus-immense-truly.ngrok-free.app/integrations/tiktok/callback
+      TIKTOK_CLIENT_KEY: sbawgik9wknh769zea
+      TIKTOK_CLIENT_SECRET: ntnIeAlvnKPC6tTIXTQpsi4kws3D7ewv
+    command: sleep infinity

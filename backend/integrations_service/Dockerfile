@@ -7,4 +7,5 @@ COPY pyproject.toml poetry.lock* ./
 
 RUN poetry install --only main
 
-COPY ./integrations-service .
+COPY ./src .
+COPY ./.vscode .vscode
