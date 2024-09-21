@@ -1,0 +1,95 @@
+networks:
+  app-network:
+    driver: bridge
+
+  internal-network:
+    driver: bridge
+    internal: true
+
+  integrations-service-network:
+    driver: bridge
+    internal: true
+
+services:
+  gateway-db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: kong
+      POSTGRES_USER: kong
+      POSTGRES_PASSWORD: kong
+    volumes:
+      - gateway-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-d", "kong", "-U", "kong" ]
+      interval: 5s
+      timeout: 30s
+      retries: 3
+    networks:
+      - internal-network
+
+  gateway-migrations:
+    image: kong:latest
+    depends_on:
+      - gateway-db
+    environment:
+      KONG_DATABASE: postgres
+      KONG_PG_HOST: gateway-db
+      KONG_PG_USER: kong
+      KONG_PG_PASSWORD: kong
+    command: "kong migrations bootstrap"
+    networks:
+      - internal-network
+
+  gateway:
+    image: kong:latest
+    depends_on:
+      - gateway-db
+      - gateway-migrations
+    environment:
+      KONG_DATABASE: postgres
+      KONG_PG_HOST: gateway-db
+      KONG_PG_USER: kong
+      KONG_PG_PASSWORD: kong
+      KONG_PROXY_ACCESS_LOG: /dev/stdout
+      KONG_ADMIN_ACCESS_LOG: /dev/stdout
+      KONG_PROXY_ERROR_LOG: /dev/stderr
+      KONG_ADMIN_ERROR_LOG: /dev/stderr
+      KONG_ADMIN_LISTEN: 0.0.0.0:8001, 0.0.0.0:8444 ssl
+      KONG_ADMIN_GUI_URL: http://localhost:8002
+    ports:
+      - "8000:8000"
+      - "8443:8443"
+      - "8001:8001"
+      - "8002:8002"
+      - "8444:8444"
+    restart: unless-stopped
+    networks:
+      - internal-network
+      - app-network
+
+  integrations-service-db:
+    image: redis:latest
+    networks:
+      - integrations-service-network
+    command: redis-server --requirepass redispass
+
+  integrations-service:
+    build:
+      context: ./backend/integrations_service
+      dockerfile: Dockerfile
+    depends_on:
+      - integrations-service-db
+    networks:
+      - integrations-service-network
+      - app-network
+    environment:
+      DATABASE_CONNECTION_STRING: "redis://redispass@integrations-service-db"
+      TIKTOK_TOKEN_URI: https://www.tiktok.com/v2/auth/authorize/
+      TIKTOK_REDIRECT_URI: https://octopus-immense-truly.ngrok-free.app/integrations/tiktok/callback
+      TIKTOK_CLIENT_KEY: sbawgik9wknh769zea
+      TIKTOK_CLIENT_SECRET: ntnIeAlvnKPC6tTIXTQpsi4kws3D7ewv
+    command: "poetry run fastapi run app/main.py --port 80 --root-path /integrations"
+
+volumes:
+  gateway-db-data:
+  gateway-config:

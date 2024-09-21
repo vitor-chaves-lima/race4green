@@ -208,5 +208,6 @@ sketch
 .ionide
 
 .vite
+.vscode
 
 # End of https://www.toptal.com/developers/gitignore/api/react,python,visualstudiocode
