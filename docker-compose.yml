@@ -68,27 +68,22 @@ services:
       - app-network
 
   integrations-service-db:
-    image: redis:latest
+    extends:
+      file: ./backend/integrations_service/docker-compose.yml
+      service: integrations-service-db
+    ports: []
     networks:
       - integrations-service-network
-    command: redis-server --requirepass redispass
 
   integrations-service:
-    build:
-      context: ./backend/integrations_service
-      dockerfile: Dockerfile
-    depends_on:
-      - integrations-service-db
+    extends:
+      file: ./backend/integrations_service/docker-compose.yml
+      service: integrations-service
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --root-path /integrations
+    ports: []
     networks:
       - integrations-service-network
-      - app-network
-    environment:
-      DATABASE_CONNECTION_STRING: "redis://redispass@integrations-service-db"
-      TIKTOK_TOKEN_URI: https://www.tiktok.com/v2/auth/authorize/
-      TIKTOK_REDIRECT_URI: https://octopus-immense-truly.ngrok-free.app/integrations/tiktok/callback
-      TIKTOK_CLIENT_KEY: sbawgik9wknh769zea
-      TIKTOK_CLIENT_SECRET: ntnIeAlvnKPC6tTIXTQpsi4kws3D7ewv
-    command: "poetry run fastapi run app/main.py --port 80 --root-path /integrations"
+      - internal-network
 
 volumes:
   gateway-db-data:
