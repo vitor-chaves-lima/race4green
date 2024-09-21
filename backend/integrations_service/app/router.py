@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends, status
 
 from app.dependencies import get_tiktok_integration_usecase
 from app.requests import TokenRequest
+from core.models.user import User
 from core.usecases.tiktok_integration import TikTokIntegrationUseCase
 
 api_router = APIRouter(prefix="/integrations")
@@ -12,4 +13,7 @@ async def tiktok_integration_start(
 	tiktok_integration_usecase: TikTokIntegrationUseCase = Depends(get_tiktok_integration_usecase)):
 
 	code = token_request.code
-	tiktok_integration_usecase.get_token(user_id="test", code=code)
+
+	user = User(user_id="test")
+
+	tiktok_integration_usecase.get_token(user, code=code)
