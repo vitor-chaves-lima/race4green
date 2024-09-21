@@ -7,7 +7,7 @@ import {HttpRequestError} from "@/lib/exceptions.ts";
 
 /*---------------- ENDPOINTS ----------------*/
 
-const TIKTOK_INTEGRATION_INIT = `${API_GATEWAY_URL}/integrations/tiktok/init`
+const TIKTOK_INTEGRATION_INIT =  new URL("/integrations/tiktok/init", API_GATEWAY_URL)
 
 /*----------------- ACTIONS -----------------*/
 
@@ -22,9 +22,8 @@ const tikTokIntegrationAuthorizeAction: ActionFunction = async () => {
 			});
 		}
 
-		const {tiktokAuthorizeURL} = await response.json();
-
-		return redirect(tiktokAuthorizeURL);
+		const {authorizeUrl} = await response.json();
+		return redirect(authorizeUrl);
 	} catch (error) {
 		console.error("Something wrong happened during the request", error)
 
