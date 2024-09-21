@@ -9,10 +9,10 @@ import { DashboardLayout } from "@/layouts/Dashboard.layout";
 import { IntegrationLayout } from "@/layouts/IntegrationLayout";
 
 import { IntegrationsIndexPage } from "@/pages/integrations/Index.page";
+import { TikTokIntegrationCallbackPage } from "@/pages/integrations/tiktok/TikTokIntegrationCallback.page.tsx";
 import { TikTokIntegrationManagePage } from "@/pages/integrations/tiktok/TikTokIntegrationManage.page";
 import { tikTokIntegrationAuthorizeAction } from "@/actions/tikTokIntegration.actions";
 import { tikTokIntegrationCallbackLoader} from "@/loaders/tikTokIntegration.loaders";
-
 
 /*--------------- INTERFACES ----------------*/
 
@@ -58,13 +58,9 @@ const integrationsRoute: RouteObject = {
 					errorElement: <TikTokIntegrationManagePage />
 				},
 				{
-					path: "authorize",
-					action: tikTokIntegrationAuthorizeAction,
-				},
-				{
 					path: "callback",
-					loader: tikTokIntegrationCallbackLoader,
-					element: <h1>Callback</h1>,
+					element: <TikTokIntegrationCallbackPage />,
+					errorElement: <TikTokIntegrationCallbackPage />
 				},
 				{
 					path: "about",
@@ -74,6 +70,25 @@ const integrationsRoute: RouteObject = {
 		},
 	],
 };
+
+const integrationsAPIRoute: RouteObject = {
+	path: "/api/integrations",
+	children: [
+		{
+			path: "tiktok",
+			children: [
+				{
+					path: "authorize",
+					action: tikTokIntegrationAuthorizeAction,
+				},
+				{
+					path: "callback",
+					loader: tikTokIntegrationCallbackLoader
+				}
+			]
+		}
+	]
+}
 
 /*----------------- ROUTER -----------------*/
 
@@ -86,7 +101,7 @@ const router = createBrowserRouter([
 				<Toaster />
 			</>
 		),
-		children: [collectiblesRoute, integrationsRoute],
+		children: [collectiblesRoute, integrationsRoute, integrationsAPIRoute],
 	},
 ]);
 

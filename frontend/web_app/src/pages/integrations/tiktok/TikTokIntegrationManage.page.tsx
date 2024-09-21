@@ -30,7 +30,7 @@ const TikTokIntegrationManagePage: React.FC = () => {
 	const handleIntegrateButtonClick = () => {
 		fetcher.submit(null, {
 			method: "POST",
-			action: "/integrations/tiktok/authorize",
+			action: "/api/integrations/tiktok/authorize",
 		});
 	};
 
