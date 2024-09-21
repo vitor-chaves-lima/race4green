@@ -2,6 +2,7 @@ import secrets
 
 from core.db.repositories.csrf_state import CSRFStateRepository
 from core.db.repositories.tiktok_token import TikTokTokenRepository
+from core.exceptions import CSRFStateException
 from core.models.tiktok_integration import TikTokUser, TikTokToken, TikTokTokenType, AuthorizeUrl
 from core.models.user import User
 from core.services.tiktok_integration import TikTokIntegrationService
@@ -49,7 +50,12 @@ class TikTokIntegrationUseCase:
 		return AuthorizeUrl(authorize_url=authorize_url, csrf_state=csrf_state)
 
 
-	def get_token(self, user: User, code: str):
+	def get_token(self, user: User, state: str, code: str):
+		csrf_state = self._csrf_state_repository.get_state(user)
+
+		if state != csrf_state:
+			raise CSRFStateException()
+
 		tiktok_token_response = self._tiktok_integration_service.get_token(code)
 		access_token = TikTokToken(
 					value=tiktok_token_response.access_token,
@@ -70,3 +76,4 @@ class TikTokIntegrationUseCase:
 		self._token_repository.store_token(user, access_token)
 		self._token_repository.store_token(user, refresh_token)
 		self._token_repository.store_user(user, tiktok_user)
+		self._csrf_state_repository.delete_state(user)

@@ -2,7 +2,6 @@ from fastapi import APIRouter, Depends, status
 from fastapi.responses import RedirectResponse
 
 from app.dependencies import get_tiktok_integration_usecase
-from app.requests import TokenRequest
 from core.models.user import User
 from core.usecases.tiktok_integration import TikTokIntegrationUseCase
 
@@ -12,7 +11,7 @@ api_router = APIRouter(prefix="/integrations")
 				responses={
 					302: {"description": "Redireciona para a página de autenticação do TikTok"},
 					400: {"description": "Erro ao gerar a URL de autorização do TikTok"},
-				})
+				}, tags=["TikTok"])
 async def tiktok_integration_init(
 	tiktok_integration_usecase: TikTokIntegrationUseCase = Depends(get_tiktok_integration_usecase)):
 
@@ -25,11 +24,10 @@ async def tiktok_integration_init(
 
 @api_router.post("/tiktok/callback", status_code=status.HTTP_201_CREATED, tags=["TikTok"])
 async def tiktok_integration_callback(
-	token_request: TokenRequest,
+	state: str,
+	code: str,
 	tiktok_integration_usecase: TikTokIntegrationUseCase = Depends(get_tiktok_integration_usecase)):
-
-	code = token_request.code
 
 	user = User(user_id="test")
 
-	tiktok_integration_usecase.get_token(user, code=code)
+	tiktok_integration_usecase.get_token(user, state=state, code=code)
