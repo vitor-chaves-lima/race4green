@@ -11,8 +11,6 @@ const tikTokIntegrationCallbackLoader: LoaderFunction = async ({
 	const code = url.searchParams.get("code");
 	const state = url.searchParams.get("state");
 
-	console.log(code)
-
 	if (code && state) {
 		return redirect("/integrations/tiktok/manage");
 	}

@@ -2,23 +2,26 @@
 
 import { ActionFunction, redirect } from "react-router-dom";
 
+import { API_GATEWAY_URL } from "@/lib/consts.ts"
+
+/*---------------- ENDPOINTS ----------------*/
+
+const TIKTOK_INTEGRATION_INIT = `${API_GATEWAY_URL}/integrations/tiktok/init`
 
 /*----------------- ACTIONS -----------------*/
 
 const tikTokIntegrationAuthorizeAction: ActionFunction = async () => {
-	const clientKey = "sbawgik9wknh769zea";
-	const scope = "user.info.basic";
-	const redirectURI = "https://octopus-immense-truly.ngrok-free.app/integrations/tiktok/callback";
+	console.log(TIKTOK_INTEGRATION_INIT)
+	const response = await fetch(TIKTOK_INTEGRATION_INIT);
 
-	const array = new Uint8Array(30);
-	const state = window.crypto.getRandomValues(array);
+	if (!response.ok) {
+		throw response;
+	}
 
-	const codeChallenge = "test";
+	const { tiktokAuthorizeURL } = await response.json();
 
-	const tikTokAuthorizeURL = `https://www.tiktok.com/v2/auth/authorize/?client_key=${clientKey}&response_type=code&scope=${scope}&redirect_uri=${redirectURI}&state=${state}&code_challenge=${codeChallenge}&code_challenge_method=S256`;
-	return redirect(tikTokAuthorizeURL);
+	return redirect(tiktokAuthorizeURL);
 }
-
 
 /*----------------- EXPORTS -----------------*/
 

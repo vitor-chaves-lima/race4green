@@ -9,7 +9,7 @@ import { IntegrationLayout } from "@/layouts/IntegrationLayout";
 import { IntegrationsIndexPage } from "@/pages/integrations/Index.page";
 import { TikTokIntegrationManagePage } from "@/pages/integrations/tiktok/TikTokIntegrationManage.page";
 import { tikTokIntegrationAuthorizeAction } from "@/actions/tikTokIntegration.actions";
-import { tikTokIntegrationCallbackLoader } from "@/loaders/tikTokIntegration.loaders";
+import { tikTokIntegrationCallbackLoader} from "@/loaders/tikTokIntegration.loaders";
 
 /*--------------- INTERFACES ----------------*/
 
