@@ -3,11 +3,6 @@ from typing import Dict
 from pydantic import BaseModel, Field
 
 
-class AuthorizeUrl(BaseModel):
-    authorize_url: str = Field(description="TikTok Authorization URL")
-    csrf_state: str = Field(description="TikTok CSRF State")
-
-
 class TokenRequest(BaseModel):
     client_key: str = Field(description="The unique identification key provisioned to the partner.")
     client_secret: str = Field(description="The unique identification secret provisioned to the partner.")

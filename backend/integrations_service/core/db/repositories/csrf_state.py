@@ -23,3 +23,8 @@ class CSRFStateRepository:
 		state = self._connector.client.get(key)
 
 		return state
+
+
+	def delete_state(self, user: User):
+		key = f"{user.user_id}/csrf/tiktok"
+		self._connector.client.delete(key)
