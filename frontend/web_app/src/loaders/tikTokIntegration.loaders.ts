@@ -23,8 +23,6 @@ const tikTokIntegrationCallbackLoader: LoaderFunction = async ({
 	const code = url.searchParams.get("code");
 	const state = url.searchParams.get("state");
 
-	await new Promise(resolve => {setTimeout(resolve, 5000)})
-
 	if (!state) {
 		throw new InvalidCallbackDataError()
 	}
