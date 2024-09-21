@@ -1,0 +1,420 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #0E110F;
+}
+
+header {
+    background-color: #0E110F;
+    padding: 10px 20px;
+    border-bottom: 1px solid white;
+    position: sticky;   
+    top: 0; 
+    z-index: 5;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #0E110F;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.desafios-btn {
+    border: none;
+    background-color: #0E110F;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.iniciativa-btn {
+    border: none;
+    background-color: #0E110F;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.impacto-btn {
+    border: none;
+    background-color: #0E110F;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    font-weight: bold;
+
+}
+
+.auth-buttons {
+    display: flex;
+}
+
+.auth-buttons .btn {
+    text-decoration: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    margin-left: 10px;
+    border: 2px solid transparent;
+}
+
+.create-account {
+    background-color: #2F8C55;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn_login {
+    background-color: #0E110F;
+    color: white; 
+    border: 2px solid white; 
+    padding: 12px 50px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: bold;
+}
+
+.create-account:hover,
+.login:hover {
+    opacity: 0.8;
+}
+
+main {
+    padding: 50px 20px;
+    background-color: #0E110F;
+    color: white;
+}
+
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.hero-content {
+    max-width: 600px;
+}
+
+.hero h1 {
+    font-size: 70px;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 18px;
+    margin-bottom: 30px;
+    width: 48%;
+}
+
+.hero-buttons {
+    display: flex;
+    align-items: center;
+}
+
+.hero-buttons .btn {
+    text-decoration: none;
+    padding: 15px 30px;
+    font-size: 16px;
+    border-radius: 4px;
+    margin-right: 15px;
+}
+
+.primary-btn {
+    background-color: #2F8C55;
+    color: white;
+    font-weight: bold;
+}
+
+.secondary-btn {
+    background-color: #2F8C55;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    padding: 0px !important;
+}
+
+.video-icon {
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.hero-image img {
+    max-width: 500px;
+    height: auto;
+    width: 90%;
+    margin-top: 130px;
+}
+
+.challenges {
+    background-color: #0E110F;
+    color: white;
+    padding: 50px 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-header h2 {
+    color: white;
+    font-size: 36px;
+    margin-bottom: 10px;
+    float: left;
+    width: 950px;
+    padding: 10px;
+}
+
+.section-header p {
+    color: white;
+    font-size: 18px;
+    margin-bottom: 40px;
+}
+
+.challenges-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.challenge-card {
+    padding: 20px;
+    border: 1px solid #333;
+    text-align: left;
+    border: 1px solid white;
+}
+
+.challenge-card .icon {
+    font-size: 36px;
+    margin-bottom: 15px;
+}
+
+.challenge-card h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #f5f5f5;
+}
+
+.challenge-card p {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #cccccc;
+}
+
+
+.sustentabilidade-section {
+    padding: 50px 20px;
+    background-color: #0E110F;
+    color: white;
+    text-align: center;
+    height: 1150px;
+    margin-bottom: 200px;
+}
+
+.sustentabilidade-section h2 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.sustentabilidade-section p {
+    font-size: 18px;
+    margin-bottom: 40px;
+    color: #b3b3b3;
+}
+
+.sustentabilidade-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.sustentabilidade-card-1 {
+    background-color: #0E110F;
+    height: 500px;
+    padding: 30px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    border: 1px solid white;
+}
+
+.sustentabilidade-card-1 img {
+    margin-left: 600px;
+    position: absolute;
+    margin-top: -110px;
+}
+
+.sustentabilidade-card-2 {
+    border: 1px solid white;
+    height: 520px;
+    padding: 30px;
+    text-align: left;
+    width: 420px;
+}
+
+.sustentabilidade-card-2 img {
+    margin-left: 60px;
+}
+
+.sustentabilidade-card-2 h3 {
+    font-size: 30px;
+}
+
+.sustentabilidade-card-3 {
+    height: 520px;
+    padding: 30px;
+    text-align: left;
+    border: 1px solid white;
+    margin-left: 500px;
+    position: relative;
+    bottom: 602px;
+}
+
+.sustentabilidade-card-3 img {
+    margin-left: 200px;
+}
+
+.sustentabilidade-card-3 h3 {
+    font-size: 30px;
+}
+
+.sustentabilidade-title {
+    display: flex;
+    flex-direction: column;
+}
+
+.sustentabilidade-title h3 {
+    font-size: 30px;
+    margin-bottom: -5px;
+}
+
+.sustentabilidade-title p {
+    width: 48%;
+    font-size: 22px;
+}
+
+.impacto-comparado {
+    background-color: #0E110F;
+    color: white;
+    padding: 50px 0;
+    text-align: center;
+    border-bottom: 1px solid white;
+}
+
+.impacto-comparado h2 {
+    font-size: 36px;
+    margin-bottom: 10px;
+    text-align: right;
+}
+
+.subtitle {
+    font-size: 18px;
+    margin-bottom: 100px;
+    color: #b3b3b3;
+    text-align: right;
+}
+
+.impacto-grid {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.impacto-left, .impacto-right {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.impacto-item h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #f5f5f5;
+}
+
+.impacto-item p {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #cccccc;
+}
+
+.divider {
+    width: 1px;
+    background-color: #666;
+    height: auto;
+}
+
+footer {
+    background-color: #0E110F;
+    color: white;
+    padding: 20px 0;
+    font-weight: bold;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer-left p {
+    font-size: 14px;
+    max-width: 600px;
+}
+
+.footer-links {
+    display: flex;
+}
+
+.footer-col {
+    margin-right: 40px;
+}
+
+.footer-col h4 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-col ul li {
+    margin-bottom: 10px;
+}
+
+.footer-col ul li a {
+    color: #b3b3b3;
+    text-decoration: none;
+}
+
+.footer-col ul li a:hover {
+    color: white;
+}
