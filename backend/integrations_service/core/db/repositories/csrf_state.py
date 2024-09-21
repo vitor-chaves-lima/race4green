@@ -17,12 +17,12 @@ class CSRFStateRepository:
 		self._connector.client.setex(key, 600, state)
 
 
-	def get_state(self, user: User) -> str:
+	def get_state(self, user: User) -> Union[str, None]:
 		key = f"{user.user_id}/csrf/tiktok"
 
 		state = self._connector.client.get(key)
 
-		return state
+		return str(state)
 
 
 	def delete_state(self, user: User):
