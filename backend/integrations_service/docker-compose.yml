@@ -2,6 +2,8 @@ services:
   integrations-service-db:
     image: redis:latest
     command: redis-server --requirepass redispass
+    ports:
+      - "5001:6379"
 
   integrations-service:
     build:
