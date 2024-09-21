@@ -3,6 +3,8 @@
 import { RouteObject, createBrowserRouter } from "react-router-dom";
 import { icons } from "lucide-react";
 
+import {Toaster} from "@/components/ui/toaster.tsx";
+
 import { DashboardLayout } from "@/layouts/Dashboard.layout";
 import { IntegrationLayout } from "@/layouts/IntegrationLayout";
 
@@ -10,6 +12,7 @@ import { IntegrationsIndexPage } from "@/pages/integrations/Index.page";
 import { TikTokIntegrationManagePage } from "@/pages/integrations/tiktok/TikTokIntegrationManage.page";
 import { tikTokIntegrationAuthorizeAction } from "@/actions/tikTokIntegration.actions";
 import { tikTokIntegrationCallbackLoader} from "@/loaders/tikTokIntegration.loaders";
+
 
 /*--------------- INTERFACES ----------------*/
 
@@ -52,6 +55,7 @@ const integrationsRoute: RouteObject = {
 				{
 					path: "manage",
 					element: <TikTokIntegrationManagePage />,
+					errorElement: <TikTokIntegrationManagePage />
 				},
 				{
 					path: "authorize",
@@ -76,7 +80,12 @@ const integrationsRoute: RouteObject = {
 const router = createBrowserRouter([
 	{
 		path: "/",
-		element: <DashboardLayout />,
+		element: (
+			<>
+				<DashboardLayout />
+				<Toaster />
+			</>
+		),
 		children: [collectiblesRoute, integrationsRoute],
 	},
 ]);
