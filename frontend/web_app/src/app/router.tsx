@@ -9,11 +9,10 @@ import { DashboardLayout } from "@/layouts/Dashboard.layout";
 import { IntegrationLayout } from "@/layouts/IntegrationLayout";
 
 import { IntegrationsIndexPage } from "@/pages/integrations/Index.page";
+import { TikTokIntegrationCallbackPage } from "@/pages/integrations/tiktok/TikTokIntegrationCallback.page.tsx";
 import { TikTokIntegrationManagePage } from "@/pages/integrations/tiktok/TikTokIntegrationManage.page";
 import { tikTokIntegrationAuthorizeAction } from "@/actions/tikTokIntegration.actions";
 import { tikTokIntegrationCallbackLoader} from "@/loaders/tikTokIntegration.loaders";
-import {TikTokIntegrationCallbackPage} from "@/pages/integrations/tiktok/TikTokIntegrationCallback.page.tsx";
-
 
 /*--------------- INTERFACES ----------------*/
 
