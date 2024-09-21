@@ -1,4 +1,3 @@
-from urllib.parse import unquote
 from fastapi import APIRouter, Depends, status
 
 from app.dependencies import get_tiktok_integration_usecase
@@ -13,4 +12,4 @@ async def tiktok_integration_start(
 	tiktok_integration_usecase: TikTokIntegrationUseCase = Depends(get_tiktok_integration_usecase)):
 
 	code = token_request.code
-	tiktok_integration_usecase.get_token(user_id="test", code=unquote(code))
+	tiktok_integration_usecase.get_token(user_id="test", code=code)
