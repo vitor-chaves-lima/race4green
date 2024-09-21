@@ -3,8 +3,16 @@
 import { RouteObject, createBrowserRouter } from "react-router-dom";
 import { icons } from "lucide-react";
 
-import { DashboardLayout } from "../layouts/Dashboard.layout";
+import {Toaster} from "@/components/ui/toaster.tsx";
+
+import { DashboardLayout } from "@/layouts/Dashboard.layout";
+import { IntegrationLayout } from "@/layouts/IntegrationLayout";
+
 import { IntegrationsIndexPage } from "@/pages/integrations/Index.page";
+import { TikTokIntegrationManagePage } from "@/pages/integrations/tiktok/TikTokIntegrationManage.page";
+import { tikTokIntegrationAuthorizeAction } from "@/actions/tikTokIntegration.actions";
+import { tikTokIntegrationCallbackLoader} from "@/loaders/tikTokIntegration.loaders";
+
 
 /*--------------- INTERFACES ----------------*/
 
@@ -30,8 +38,39 @@ const integrationsRoute: RouteObject = {
 			index: true,
 		},
 		{
-			element: <h1>Tik Tok</h1>,
+			element: (
+				<IntegrationLayout
+					title="TikTok"
+					backButtonPath="/integrations"
+					subRouteTitles={
+						new Map([
+							["/integrations/tiktok/manage", "Gerenciar"],
+							["/integrations/tiktok/about", "Saiba Mais"],
+						])
+					}
+				/>
+			),
 			path: "tiktok",
+			children: [
+				{
+					path: "manage",
+					element: <TikTokIntegrationManagePage />,
+					errorElement: <TikTokIntegrationManagePage />
+				},
+				{
+					path: "authorize",
+					action: tikTokIntegrationAuthorizeAction,
+				},
+				{
+					path: "callback",
+					loader: tikTokIntegrationCallbackLoader,
+					element: <h1>Callback</h1>,
+				},
+				{
+					path: "about",
+					element: <h1>Saiba Mais</h1>,
+				},
+			],
 		},
 	],
 };
@@ -41,7 +80,12 @@ const integrationsRoute: RouteObject = {
 const router = createBrowserRouter([
 	{
 		path: "/",
-		element: <DashboardLayout />,
+		element: (
+			<>
+				<DashboardLayout />
+				<Toaster />
+			</>
+		),
 		children: [collectiblesRoute, integrationsRoute],
 	},
 ]);

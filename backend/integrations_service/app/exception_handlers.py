@@ -1,14 +1,27 @@
 from fastapi import Request, status
 from fastapi.responses import JSONResponse
 
-from core.exceptions import TokenException
+from core.exceptions import TokenException, CSRFStateException
+
+
+async def csrf_exception_handler(_: Request, exc: CSRFStateException):
+    return JSONResponse(
+        status_code=status.HTTP_400_BAD_REQUEST,
+        content={
+            "message": "A validação de CSRF não foi concluída com sucesso",
+			"error": {
+				"type": "invalid_csrf_state",
+				"description": exc.error_description
+			}
+        },
+    )
 
 
 async def token_exception_handler(_: Request, exc: TokenException):
     return JSONResponse(
         status_code=status.HTTP_400_BAD_REQUEST,
         content={
-            "message": f"Não foi possível validar o código de autorização do Tik Tok",
+            "message": "Não foi possível validar o código de autorização do Tik Tok",
             "error": {
                 "type": exc.error_type,
                 "description": exc.error_description
@@ -19,5 +32,6 @@ async def token_exception_handler(_: Request, exc: TokenException):
 
 def get_exception_handlers():
     return [
+		(CSRFStateException, csrf_exception_handler),
         (TokenException, token_exception_handler),
     ]
