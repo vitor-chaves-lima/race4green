@@ -60,7 +60,7 @@ const integrationsRoute: RouteObject = {
 				{
 					path: "callback",
 					element: <TikTokIntegrationCallbackPage />,
-					errorElement: <TikTokIntegrationCallbackPage />
+					loader: tikTokIntegrationCallbackLoader
 				},
 				{
 					path: "about",
@@ -81,10 +81,6 @@ const integrationsAPIRoute: RouteObject = {
 					path: "authorize",
 					action: tikTokIntegrationAuthorizeAction,
 				},
-				{
-					path: "callback",
-					loader: tikTokIntegrationCallbackLoader
-				}
 			]
 		}
 	]
