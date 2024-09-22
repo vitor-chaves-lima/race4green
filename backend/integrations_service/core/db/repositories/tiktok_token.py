@@ -27,6 +27,9 @@ class TikTokTokenRepository:
 		key = f"{user.user_id}/tokens/tiktok/{token_type.value}"
 
 		token_value = self._connector.client.getex(key)
+		if token_value is None:
+			return None
+
 		token_expires_in = self._connector.client.ttl(key)
 
 		return TikTokToken(user_id=user.user_id, value=token_value, expires_in=token_expires_in, token_type=token_type)
@@ -42,3 +45,13 @@ class TikTokTokenRepository:
 
 		tiktok_user = TikTokUser(user_id=tiktok_user_id)
 		return tiktok_user
+
+
+	def clear_user_data(self, user):
+		access_token_key = f"{user.user_id}/tokens/tiktok/{TikTokTokenType.ACCESS.value}"
+		refresh_token_key = f"{user.user_id}/tokens/tiktok/{TikTokTokenType.REFRESH.value}"
+		tiktok_user_id_key = f"{user.user_id}/tokens/tiktok/user_id"
+
+		self._connector.client.delete(access_token_key)
+		self._connector.client.delete(refresh_token_key)
+		self._connector.client.delete(tiktok_user_id_key)

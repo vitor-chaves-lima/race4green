@@ -87,3 +87,7 @@ class TikTokIntegrationUseCase:
 			return TikTokIntegrationStatus.NOT_CONNECTED
 		else:
 			return TikTokIntegrationStatus.CONNECTED
+
+
+	def delete_user(self, user: User):
+		self._token_repository.clear_user_data(user)

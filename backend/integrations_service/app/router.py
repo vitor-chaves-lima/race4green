@@ -33,7 +33,7 @@ async def tiktok_integration_callback(
 	tiktok_integration_usecase.get_token(user, state=state, code=code)
 
 
-@api_router.post("/tiktok/status", status_code=status.HTTP_200_OK,
+@api_router.get("/tiktok", status_code=status.HTTP_200_OK,
 				 tags=["TikTok"], response_model=TikTokIntegrationStatusResponseModel)
 async def tiktok_integration_status(
 	tiktok_integration_usecase: TikTokIntegrationUseCase = Depends(get_tiktok_integration_usecase)):
@@ -42,3 +42,12 @@ async def tiktok_integration_status(
 
 	integration_status = tiktok_integration_usecase.get_integration_status(user)
 	return TikTokIntegrationStatusResponseModel(status=integration_status)
+
+
+@api_router.delete("/tiktok", status_code=status.HTTP_204_NO_CONTENT, tags=["TikTok"])
+async def tiktok_integration_delete(
+	tiktok_integration_usecase: TikTokIntegrationUseCase = Depends(get_tiktok_integration_usecase)):
+
+	user = User(user_id="test")
+
+	tiktok_integration_usecase.delete_user(user)
