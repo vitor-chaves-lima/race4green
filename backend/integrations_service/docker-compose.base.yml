@@ -1,0 +1,11 @@
+services:
+  integrations-service-db:
+    image: redis:latest
+    command: redis-server --requirepass redispass
+
+  integrations-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - integrations-service-db
