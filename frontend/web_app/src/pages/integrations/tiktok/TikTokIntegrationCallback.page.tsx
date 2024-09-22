@@ -71,7 +71,7 @@ const TikTokIntegrationCallbackPage: React.FC = () => {
 			<ReloadIcon className="h-10 w-10 animate-spin"/>
 		</div>
 	)}>
-		<Await resolve={loaderData.response} errorElement={<TikTokIntegrationCallbackErrorElement />}>
+		<Await resolve={loaderData.data} errorElement={<TikTokIntegrationCallbackErrorElement />}>
 			<TikTokIntegrationCallbackSuccessElement />
 		</Await>
 	</React.Suspense>

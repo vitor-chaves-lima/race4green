@@ -3,7 +3,7 @@
 import { RouteObject, createBrowserRouter } from "react-router-dom";
 import { icons } from "lucide-react";
 
-import {Toaster} from "@/components/ui/toaster.tsx";
+import { Toaster } from "@/components/ui/toaster.tsx";
 
 import { DashboardLayout } from "@/layouts/Dashboard.layout";
 import { IntegrationLayout } from "@/layouts/IntegrationLayout";
@@ -11,8 +11,14 @@ import { IntegrationLayout } from "@/layouts/IntegrationLayout";
 import { IntegrationsIndexPage } from "@/pages/integrations/Index.page";
 import { TikTokIntegrationCallbackPage } from "@/pages/integrations/tiktok/TikTokIntegrationCallback.page.tsx";
 import { TikTokIntegrationManagePage } from "@/pages/integrations/tiktok/TikTokIntegrationManage.page";
-import { tikTokIntegrationAuthorizeAction } from "@/actions/tikTokIntegration.actions";
-import { tikTokIntegrationCallbackLoader} from "@/loaders/tikTokIntegration.loaders";
+import {
+	tikTokIntegrationAuthorizeAction,
+	tikTokIntegrationDisconnectAction,
+} from "@/actions/tikTokIntegration.actions";
+import {
+	tikTokIntegrationCallbackLoader,
+	tikTokIntegrationStatusLoader,
+} from "@/loaders/tikTokIntegration.loaders";
 
 /*--------------- INTERFACES ----------------*/
 
@@ -55,12 +61,12 @@ const integrationsRoute: RouteObject = {
 				{
 					path: "manage",
 					element: <TikTokIntegrationManagePage />,
-					errorElement: <TikTokIntegrationManagePage />
+					loader: tikTokIntegrationStatusLoader,
 				},
 				{
 					path: "callback",
 					element: <TikTokIntegrationCallbackPage />,
-					loader: tikTokIntegrationCallbackLoader
+					loader: tikTokIntegrationCallbackLoader,
 				},
 				{
 					path: "about",
@@ -81,10 +87,14 @@ const integrationsAPIRoute: RouteObject = {
 					path: "authorize",
 					action: tikTokIntegrationAuthorizeAction,
 				},
-			]
-		}
-	]
-}
+				{
+					path: "disconnect",
+					action: tikTokIntegrationDisconnectAction,
+				},
+			],
+		},
+	],
+};
 
 /*----------------- ROUTER -----------------*/
 

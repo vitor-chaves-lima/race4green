@@ -2,18 +2,25 @@
 
 import { ActionFunction, redirect } from "react-router-dom";
 
-import { API_GATEWAY_URL } from "@/lib/consts.ts"
-import {HttpRequestError} from "@/lib/exceptions.ts";
+import { API_GATEWAY_URL } from "@/lib/consts.ts";
+import { HttpRequestError } from "@/lib/exceptions.ts";
 
 /*---------------- ENDPOINTS ----------------*/
 
-const TIKTOK_INTEGRATION_INIT =  new URL("/integrations/tiktok/init", API_GATEWAY_URL)
+const TIKTOK_INTEGRATION_INIT = new URL(
+	"/integrations/tiktok/init",
+	API_GATEWAY_URL,
+);
+const TIKTOK_INTEGRATION_DISCONNECT = new URL(
+	"/integrations/tiktok",
+	API_GATEWAY_URL,
+);
 
 /*----------------- ACTIONS -----------------*/
 
 const tikTokIntegrationAuthorizeAction: ActionFunction = async () => {
 	try {
-		const response = await fetch(TIKTOK_INTEGRATION_INIT)
+		const response = await fetch(TIKTOK_INTEGRATION_INIT);
 
 		if (!response.ok) {
 			// TODO: Melhorar tratamento de erros do Endpoint
@@ -22,15 +29,36 @@ const tikTokIntegrationAuthorizeAction: ActionFunction = async () => {
 			});
 		}
 
-		const {authorizeUrl} = await response.json();
+		const { authorizeUrl } = await response.json();
 		return redirect(authorizeUrl);
 	} catch (error) {
-		console.error("Something wrong happened during the request", error)
+		console.error("Something wrong happened during the request", error);
 
 		throw new HttpRequestError();
 	}
-}
+};
+
+const tikTokIntegrationDisconnectAction: ActionFunction = async () => {
+	try {
+		const response = await fetch(TIKTOK_INTEGRATION_DISCONNECT, {
+			method: "DELETE",
+		});
+
+		if (!response.ok) {
+			// TODO: Melhorar tratamento de erros do Endpoint
+			return redirect("/integrations/tiktok/manage", {
+				status: response.status,
+			});
+		}
+
+		return null;
+	} catch (error) {
+		console.error("Something wrong happened during the request", error);
+
+		throw new HttpRequestError();
+	}
+};
 
 /*----------------- EXPORTS -----------------*/
 
-export { tikTokIntegrationAuthorizeAction };
+export { tikTokIntegrationAuthorizeAction, tikTokIntegrationDisconnectAction };
