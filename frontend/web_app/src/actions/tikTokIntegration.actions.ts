@@ -2,8 +2,8 @@
 
 import { ActionFunction, redirect } from "react-router-dom";
 
+import { HttpRequestError, IntegrationInitError } from "@/lib/exceptions.ts";
 import { API_GATEWAY_URL } from "@/lib/consts.ts";
-import { HttpRequestError } from "@/lib/exceptions.ts";
 
 /*---------------- ENDPOINTS ----------------*/
 
@@ -16,49 +16,49 @@ const TIKTOK_INTEGRATION_DISCONNECT = new URL(
 	API_GATEWAY_URL,
 );
 
+/*----------------- FETCHERS ----------------*/
+
+const fetcherTiktokIntegrationInitEndpoint = async () => {
+	const response = await fetch(TIKTOK_INTEGRATION_INIT).catch((error) => {
+		console.error("Something wrong happened during the request", error);
+		throw new HttpRequestError();
+	});
+
+	if (!response.ok) {
+		const responseJson = await response.json();
+		throw new IntegrationInitError(responseJson.stringify());
+	}
+
+	const { authorizeUrl } = await response.json();
+	return redirect(authorizeUrl);
+};
+
+const fetcherTiktokIntegrationDisconnectEndpoint = async () => {
+	const response = await fetch(TIKTOK_INTEGRATION_DISCONNECT, {
+		method: "DELETE",
+	}).catch((error) => {
+		console.error("Something wrong happened during the request", error);
+		throw new HttpRequestError();
+	});
+
+	if (!response.ok) {
+		const responseJson = await response.json();
+		throw new IntegrationInitError(responseJson.stringify());
+	}
+
+	return null;
+};
+
 /*----------------- ACTIONS -----------------*/
 
-const tikTokIntegrationAuthorizeAction: ActionFunction = async () => {
-	try {
-		const response = await fetch(TIKTOK_INTEGRATION_INIT);
-
-		if (!response.ok) {
-			// TODO: Melhorar tratamento de erros do Endpoint
-			return redirect("/integrations/tiktok/manage", {
-				status: response.status,
-			});
-		}
-
-		const { authorizeUrl } = await response.json();
-		return redirect(authorizeUrl);
-	} catch (error) {
-		console.error("Something wrong happened during the request", error);
-
-		throw new HttpRequestError();
-	}
+const tikTokIntegrationInitAction: ActionFunction = async () => {
+	return await fetcherTiktokIntegrationInitEndpoint();
 };
 
 const tikTokIntegrationDisconnectAction: ActionFunction = async () => {
-	try {
-		const response = await fetch(TIKTOK_INTEGRATION_DISCONNECT, {
-			method: "DELETE",
-		});
-
-		if (!response.ok) {
-			// TODO: Melhorar tratamento de erros do Endpoint
-			return redirect("/integrations/tiktok/manage", {
-				status: response.status,
-			});
-		}
-
-		return null;
-	} catch (error) {
-		console.error("Something wrong happened during the request", error);
-
-		throw new HttpRequestError();
-	}
+	return await fetcherTiktokIntegrationDisconnectEndpoint();
 };
 
 /*----------------- EXPORTS -----------------*/
 
-export { tikTokIntegrationAuthorizeAction, tikTokIntegrationDisconnectAction };
+export { tikTokIntegrationInitAction, tikTokIntegrationDisconnectAction };

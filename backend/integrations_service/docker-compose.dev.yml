@@ -13,7 +13,7 @@ services:
     environment:
       DATABASE_CONNECTION_STRING: "redis://:redispass@integrations-service-db:6379/0"
       TIKTOK_TOKEN_URI: https://open.tiktokapis.com/v2/oauth/token/
-      TIKTOK_REDIRECT_URI: https://octopus-immense-truly.ngrok-free.app/integrations/tiktok/callback
+      TIKTOK_REDIRECT_URI: https://concrete-troll-brightly.ngrok-free.app/integrations/tiktok/callback
       TIKTOK_CLIENT_KEY: sbawgik9wknh769zea
       TIKTOK_CLIENT_SECRET: ntnIeAlvnKPC6tTIXTQpsi4kws3D7ewv
     volumes:

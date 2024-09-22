@@ -1,11 +1,20 @@
 /*----------------- IMPORTS -----------------*/
 
-import React, { useEffect } from "react";
+import React, { Suspense, useCallback, useEffect } from "react";
 
-import { useFetcher, useLoaderData, useRouteError } from "react-router-dom";
-import { ReloadIcon } from "@radix-ui/react-icons";
+import {
+	Await,
+	useAsyncError,
+	useFetcher,
+	useLoaderData,
+	useLocation,
+	useNavigate,
+	useRouteError,
+} from "react-router-dom";
 
-import { HttpRequestError } from "@/lib/exceptions.ts";
+import { Button } from "@/components/ui/button.tsx";
+import { TikTokStatusLoaderReturn } from "@/loaders/tikTokIntegration.loaders.ts";
+import { useToast } from "@/components/hooks/use-toast.ts";
 
 import {
 	Dialog,
@@ -17,50 +26,80 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from "@/components/ui/dialog.tsx";
-import { Button } from "@/components/ui/button";
 
-import { TikTokStatusLoaderReturn } from "@/loaders/tikTokIntegration.loaders.ts";
-import { useToast } from "@/components/hooks/use-toast.ts";
+import { HttpRequestError, IntegrationInitError } from "@/lib/exceptions.ts";
 
 /*------------- ERROR HANDLING --------------*/
 
-const handleErrorText = (error: unknown): string => {
-	if (error instanceof HttpRequestError) {
-		return "Não foi possível se comunicar com a API";
-	}
+const TikTokIntegrationManageErrorElement = () => {
+	const error = useRouteError();
+	const navigate = useNavigate();
 
-	return "Erro desconhecido";
+	const getErrorText = useCallback(() => {
+		if (error instanceof HttpRequestError) {
+			return "Não foi possível se comunicar com a API";
+		} else if (error instanceof IntegrationInitError) {
+			return error.message;
+		}
+
+		return "Erro desconhecido";
+	}, [error]);
+
+	useEffect(() => {
+		navigate("/integrations/tiktok/manage", {
+			replace: true,
+			state: {
+				toastData: {
+					variant: "destructive",
+					title: "Erro",
+					description: getErrorText(),
+				},
+			},
+		});
+	}, [navigate, getErrorText]);
+
+	return <></>;
+};
+
+const TikTokIntegrationManageLoaderErrorElement = () => {
+	const error = useAsyncError();
+	const navigate = useNavigate();
+
+	const getErrorText = useCallback(() => {
+		if (error instanceof HttpRequestError) {
+			return "Não foi possível se comunicar com a API";
+		} else if (error instanceof IntegrationInitError) {
+			return error.message;
+		}
+
+		return "Erro desconhecido";
+	}, [error]);
+
+	useEffect(() => {
+		navigate("/integrations", {
+			replace: true,
+			state: {
+				toastData: {
+					variant: "destructive",
+					title: "Erro",
+					description: getErrorText(),
+				},
+			},
+		});
+	}, [navigate, getErrorText]);
+
+	return <></>;
 };
 
 /*-------------- SUBCOMPONENTS --------------*/
 
 const TikTokIntegrationManageNotConnectedContent = () => {
-	const { toast } = useToast();
 	const fetcher = useFetcher();
-	const routeError = useRouteError();
 
-	useEffect(() => {
-		if (routeError) {
-			toast({
-				variant: "destructive",
-				title: "Erro",
-				description: handleErrorText(routeError),
-			});
-		}
-	}, [toast, routeError]);
-
-	useEffect(() => {
-		toast({
-			variant: "success",
-			title: "Sucesso",
-			description: "A integração com o TikTok foi concluída",
-		});
-	}, [toast]);
-
-	const handleIntegrateButtonClick = () => {
+	const handleIntegrationInit = () => {
 		fetcher.submit(null, {
-			method: "POST",
-			action: "/api/integrations/tiktok/authorize",
+			method: "post",
+			action: "/api/integrations/tiktok/init",
 		});
 	};
 
@@ -76,14 +115,12 @@ const TikTokIntegrationManageNotConnectedContent = () => {
 			</div>
 
 			<Button
-				variant={"default"}
-				onClick={handleIntegrateButtonClick}
+				variant="default"
 				className="text-xl py-7 px-10 rounded"
-				disabled={fetcher.state === "submitting"}
+				name="intent"
+				value="connect"
+				onClick={handleIntegrationInit}
 			>
-				{fetcher.state === "submitting" && (
-					<ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
-				)}
 				Conectar
 			</Button>
 		</div>
@@ -131,9 +168,6 @@ const TikTokIntegrationDisconnect = () => {
 						className="rounded"
 						onClick={handledDisconnectButtonClick}
 					>
-						{fetcher.state === "submitting" && (
-							<ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
-						)}
 						Desconectar
 					</Button>
 				</DialogFooter>
@@ -163,12 +197,33 @@ const TikTokIntegrationManageConnectedContent = () => {
 
 const TikTokIntegrationManagePage: React.FC = () => {
 	const { status } = useLoaderData() as TikTokStatusLoaderReturn;
+	const location = useLocation();
 
-	if (status === "notConnected")
-		return <TikTokIntegrationManageNotConnectedContent />;
-	else return <TikTokIntegrationManageConnectedContent />;
+	const { toast } = useToast();
+
+	useEffect(() => {
+		const toastData = location.state?.toastData;
+
+		if (toastData) {
+			toast({ ...toastData });
+		}
+	}, [location, toast]);
+
+	return (
+		<Suspense>
+			<Await
+				resolve={status}
+				errorElement={<TikTokIntegrationManageLoaderErrorElement />}
+				children={(resolvedStatus) => {
+					if (resolvedStatus === "notConnected")
+						return <TikTokIntegrationManageNotConnectedContent />;
+					else return <TikTokIntegrationManageConnectedContent />;
+				}}
+			></Await>
+		</Suspense>
+	);
 };
 
 /*----------------- EXPORTS -----------------*/
 
-export { TikTokIntegrationManagePage };
+export { TikTokIntegrationManagePage, TikTokIntegrationManageErrorElement };
