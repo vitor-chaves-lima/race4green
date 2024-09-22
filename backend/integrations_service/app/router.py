@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, status
 
 from app.dependencies import get_tiktok_integration_usecase
-from app.responses import TikTokIntegrationInitResponseModel
+from app.responses import TikTokIntegrationInitResponseModel, TikTokIntegrationStatusResponseModel
 from core.models.user import User
 from core.usecases.tiktok_integration import TikTokIntegrationUseCase
 
@@ -31,3 +31,14 @@ async def tiktok_integration_callback(
 	user = User(user_id="test")
 
 	tiktok_integration_usecase.get_token(user, state=state, code=code)
+
+
+@api_router.post("/tiktok/status", status_code=status.HTTP_200_OK,
+				 tags=["TikTok"], response_model=TikTokIntegrationStatusResponseModel)
+async def tiktok_integration_status(
+	tiktok_integration_usecase: TikTokIntegrationUseCase = Depends(get_tiktok_integration_usecase)):
+
+	user = User(user_id="test")
+
+	integration_status = tiktok_integration_usecase.get_integration_status(user)
+	return TikTokIntegrationStatusResponseModel(status=integration_status)
