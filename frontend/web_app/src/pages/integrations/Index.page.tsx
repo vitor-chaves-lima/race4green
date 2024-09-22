@@ -1,9 +1,12 @@
 /*----------------- IMPORTS -----------------*/
 
-import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
 
+import { Link, useLocation } from "react-router-dom";
+
+import { Button } from "@/components/ui/button";
 import TikTokLogo from "@/assets/logos/tiktok.svg";
+import { useToast } from "@/components/hooks/use-toast.ts";
 
 /*--------------- INTERFACES ----------------*/
 
@@ -24,7 +27,7 @@ const IntegrationListPlatformCard: React.FC<IntegrationListCardProps> = ({
 }: IntegrationListCardProps) => {
 	return (
 		<div className="w-full h-full border-2 rounded-2xl flex flex-col items-center justify-center gap-10 px-10 py-8">
-			<img src={logo} className="h-24 w-24" />
+			<img src={logo} className="h-24 w-24" alt="TikTok Logo" />
 
 			<div className="flex flex-col items-center gap-7">
 				<div className="flex flex-col items-center">
@@ -59,6 +62,18 @@ const IntegrationListPlatformCard: React.FC<IntegrationListCardProps> = ({
 /*---------------- COMPONENT ----------------*/
 
 const IntegrationsIndexPage: React.FC = () => {
+	const location = useLocation();
+
+	const { toast } = useToast();
+
+	useEffect(() => {
+		const toastData = location.state?.toastData;
+
+		if (toastData) {
+			toast({ ...toastData });
+		}
+	}, [location, toast]);
+
 	return (
 		<div className="flex flex-col h-full w-full items-center justify-center gap-16">
 			<div className="flex flex-col w-full items-center justify-center gap-3">
