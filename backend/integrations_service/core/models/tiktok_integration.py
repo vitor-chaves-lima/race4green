@@ -36,3 +36,8 @@ class TikTokToken(BaseModel):
 
 class TikTokUser(BaseModel):
     user_id: str = Field(description="TikTok user id")
+
+
+class TikTokIntegrationStatus(Enum):
+    CONNECTED = "connected"
+    NOT_CONNECTED = "notConnected"

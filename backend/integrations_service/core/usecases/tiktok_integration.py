@@ -3,7 +3,7 @@ import secrets
 from core.db.repositories.csrf_state import CSRFStateRepository
 from core.db.repositories.tiktok_token import TikTokTokenRepository
 from core.exceptions import CSRFStateException
-from core.models.tiktok_integration import TikTokUser, TikTokToken, TikTokTokenType
+from core.models.tiktok_integration import TikTokUser, TikTokToken, TikTokTokenType, TikTokIntegrationStatus
 from core.models.user import User
 from core.services.tiktok_integration import TikTokIntegrationService
 from core.settings import TikTokIntegrationSettings
@@ -77,3 +77,13 @@ class TikTokIntegrationUseCase:
 		self._token_repository.store_token(user, refresh_token)
 		self._token_repository.store_user(user, tiktok_user)
 		self._csrf_state_repository.delete_state(user)
+
+
+	def get_integration_status(self, user: User) -> TikTokIntegrationStatus:
+		refresh_token = self._token_repository.get_token(user=user, token_type=TikTokTokenType.REFRESH)
+		tiktok_user = self._token_repository.get_user(user)
+
+		if refresh_token is None or tiktok_user is None:
+			return TikTokIntegrationStatus.NOT_CONNECTED
+		else:
+			return TikTokIntegrationStatus.CONNECTED

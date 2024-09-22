@@ -1,5 +1,11 @@
 from pydantic import BaseModel, Field
 
+from core.models.tiktok_integration import TikTokIntegrationStatus
+
 
 class TikTokIntegrationInitResponseModel(BaseModel):
     authorize_url: str = Field(alias='authorizeUrl')
+
+
+class TikTokIntegrationStatusResponseModel(BaseModel):
+    status: TikTokIntegrationStatus
