@@ -2,8 +2,9 @@ import secrets
 
 from core.db.repositories.csrf_state import CSRFStateRepository
 from core.db.repositories.tiktok_token import TikTokTokenRepository
-from core.exceptions import CSRFStateException
-from core.models.tiktok_integration import TikTokUser, TikTokToken, TikTokTokenType, TikTokIntegrationStatus
+from core.exceptions import CSRFStateException, TokenException
+from core.models.tiktok_integration import TikTokUser, TikTokToken, TikTokTokenType, TikTokIntegrationStatus, \
+	TokenResponse
 from core.models.user import User
 from core.services.tiktok_integration import TikTokIntegrationService
 from core.settings import TikTokIntegrationSettings
@@ -31,6 +32,23 @@ class TikTokIntegrationUseCase:
 	@staticmethod
 	def _generate_csrf_state(length: int) -> str:
 		return secrets.token_urlsafe(length)
+
+
+	def _get_access_token(self, user: User) -> TikTokToken:
+		refresh_token = self._token_repository.get_token(user=user, token_type=TikTokTokenType.REFRESH)
+
+		if refresh_token is None:
+			raise TokenException(error_type="InvalidRefreshToken", error_description="Invalid refresh token")
+
+		token_response = self._tiktok_integration_service.refresh_token(refresh_token=refresh_token)
+
+		refresh_token = TikTokToken(
+			value=token_response.refresh_token,
+			expires_in=token_response.refresh_token_expires_in,
+			token_type=TikTokTokenType.REFRESH
+		)
+
+		return refresh_token
 
 
 	def get_authorize_url(self, user: User) -> str:
@@ -91,3 +109,14 @@ class TikTokIntegrationUseCase:
 
 	def delete_user(self, user: User):
 		self._token_repository.clear_user_data(user)
+
+
+	def sync(self, user: User):
+		access_token = self._token_repository.get_token(user=user, token_type=TikTokTokenType.ACCESS)
+
+		if access_token is None:
+			new_access_token = self._get_access_token(user)
+			self._token_repository.store_token(user, new_access_token)
+			access_token = new_access_token
+
+

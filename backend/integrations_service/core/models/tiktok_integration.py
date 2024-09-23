@@ -11,6 +11,12 @@ class TokenRequest(BaseModel):
     redirect_uri: str = Field(description="Its value must be the same as the redirect_uri used for requesting code.")
 
 
+class RefreshTokenRequest(BaseModel):
+    client_key: str = Field(description="The unique identification key provisioned to the partner.")
+    client_secret: str = Field(description="The unique identification secret provisioned to the partner.")
+    refresh_token: str = Field(description="The refresh token.")
+
+
 class TokenResponse(BaseModel):
     user_id: str = Field(alias="open_id", description="The unique identifier for the TikTok user, known as 'open_id'.")
     access_token: str = Field(description="The access token that grants authorization to access TikTok resources.")
