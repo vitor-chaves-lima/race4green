@@ -1,11 +1,14 @@
 services:
-  integrations-service-db:
+  integrations-service-token-db:
     image: redis:latest
     command: redis-server --requirepass redispass
+
+  integrations-sync-db:
+    image: mongo:latest
 
   integrations-service:
     build:
       context: .
       dockerfile: Dockerfile
     depends_on:
-      - integrations-service-db
+      - integrations-service-token-db

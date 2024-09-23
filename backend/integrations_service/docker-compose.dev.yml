@@ -1,10 +1,18 @@
 services:
-  integrations-service-db:
+  integrations-service-token-db:
     extends:
       file: ./docker-compose.base.yml
-      service: integrations-service-db
+      service: integrations-service-token-db
     ports:
       - "5001:6379"
+
+  integrations-sync-db:
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    ports:
+      - "5002:27017"
 
   integrations-service:
     extends:
