@@ -5,6 +5,8 @@ services:
 
   integrations-sync-db:
     image: mongo:latest
+    volumes:
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
 
   integrations-service:
     build:
@@ -12,3 +14,4 @@ services:
       dockerfile: Dockerfile
     depends_on:
       - integrations-service-token-db
+      - integrations-sync-db
