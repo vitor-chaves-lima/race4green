@@ -73,7 +73,9 @@ services:
       - integrations-service-network
 
   integrations-sync-db:
-    image: mongo:latest
+    extends:
+      file: ./backend/integrations_service/docker-compose.base.yml
+      service: integrations-sync-db
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example

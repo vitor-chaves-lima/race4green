@@ -7,7 +7,9 @@ services:
       - "5001:6379"
 
   integrations-sync-db:
-    image: mongo:latest
+    extends:
+      file: ./docker-compose.base.yml
+      service: integrations-sync-db
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
