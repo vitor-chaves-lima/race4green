@@ -24,6 +24,10 @@ header {
     font-size: 24px;
     font-weight: bold;
     color: #fff;
+    background-color: #0E110F;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
 }
 
 .desafios-btn {
@@ -154,6 +158,8 @@ main {
 .video-icon {
     margin-right: 10px;
     font-weight: bold;
+    color: white;
+    text-decoration: none;
 }
 
 .hero-image img {
@@ -315,7 +321,7 @@ main {
 .impacto-comparado {
     background-color: #0E110F;
     color: white;
-    padding: 50px 0;
+    padding: 100px 0;
     text-align: center;
     border-bottom: 1px solid white;
 }
