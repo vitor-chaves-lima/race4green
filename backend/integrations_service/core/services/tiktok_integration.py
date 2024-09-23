@@ -1,8 +1,9 @@
-from typing import Union
+from typing import Union, Optional
 
 import requests
 from core.settings import TikTokIntegrationSettings
-from core.models.tiktok_integration import TokenRequest, TokenResponse, TikTokToken, RefreshTokenRequest
+from core.models.tiktok_integration import TokenRequest, TokenResponse, TikTokToken, RefreshTokenRequest, \
+	VideosListRequest, TikTokVideosListResponse, TikTokVideoData
 from core.exceptions import TokenException
 
 
@@ -49,7 +50,41 @@ class TikTokIntegrationService:
 			client_key=self._settings.client_key,
 			client_secret=self._settings.client_secret,
 			grant_type="refresh_token",
-			redirect_uri=self._settings.redirect_uri,
+			refresh_token=refresh_token.value,
 		)
 
 		return self._token_request(request_data)
+
+
+	def get_videos_list(self, access_token: TikTokToken, cursor: Optional[int]) -> TikTokVideosListResponse:
+		request_data = VideosListRequest(max_count=10, cursor=cursor)
+
+		response = requests.request(
+			method="POST",
+			url="https://open.tiktokapis.com/v2/video/list/?fields=cover_image_url,id,title,create_time,video_description",
+			headers={
+				"Authorization": "Bearer " + access_token.value,
+				"Content-Type": "application/json"
+			},
+			data=request_data.model_dump_json(exclude_none=True))
+
+		response_json = response.json()
+
+		if response_json["error"]["code"] != "ok":
+			raise TokenException(response_json.get("error"), response_json.get("error_description"))
+
+		response_data = response_json["data"]
+
+		tiktok_videos_list = TikTokVideosListResponse(
+			videos=[TikTokVideoData(
+				id=v["id"],
+				title=v["title"],
+				description=v["video_description"],
+				cover_image_url=v["cover_image_url"],
+				create_timestamp=v["create_time"]
+			) for v in response_data["videos"]],
+			cursor=response_data["cursor"],
+			has_more=response_data["has_more"]
+		)
+
+		return tiktok_videos_list

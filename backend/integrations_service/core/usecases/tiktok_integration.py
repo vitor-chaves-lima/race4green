@@ -1,10 +1,11 @@
 import secrets
+from typing import List
 
 from core.db.repositories.csrf_state import CSRFStateRepository
 from core.db.repositories.tiktok_token import TikTokTokenRepository
 from core.exceptions import CSRFStateException, TokenException
 from core.models.tiktok_integration import TikTokUser, TikTokToken, TikTokTokenType, TikTokIntegrationStatus, \
-	TokenResponse
+	TokenResponse, TikTokVideoData
 from core.models.user import User
 from core.services.tiktok_integration import TikTokIntegrationService
 from core.settings import TikTokIntegrationSettings
@@ -34,7 +35,7 @@ class TikTokIntegrationUseCase:
 		return secrets.token_urlsafe(length)
 
 
-	def _get_access_token(self, user: User) -> TikTokToken:
+	def _get_new_access_token(self, user: User) -> TikTokToken:
 		refresh_token = self._token_repository.get_token(user=user, token_type=TikTokTokenType.REFRESH)
 
 		if refresh_token is None:
@@ -42,14 +43,40 @@ class TikTokIntegrationUseCase:
 
 		token_response = self._tiktok_integration_service.refresh_token(refresh_token=refresh_token)
 
-		refresh_token = TikTokToken(
-			value=token_response.refresh_token,
-			expires_in=token_response.refresh_token_expires_in,
-			token_type=TikTokTokenType.REFRESH
+		access_token = TikTokToken(
+			value=token_response.access_token,
+			expires_in=token_response.access_token_expires_in,
+			token_type=TikTokTokenType.ACCESS
 		)
 
-		return refresh_token
+		return access_token
 
+
+	def _get_access_token(self, user: User) -> TikTokToken:
+		access_token = self._token_repository.get_token(user=user, token_type=TikTokTokenType.ACCESS)
+
+		if access_token is None:
+			new_access_token = self._get_new_access_token(user)
+			self._token_repository.store_token(user, new_access_token)
+			access_token = new_access_token
+
+		return access_token
+
+
+	def _fetch_whole_movies_list(self, user: User) -> List[TikTokVideoData]:
+		videos_list: List[TikTokVideoData] = list[TikTokVideoData]()
+
+		access_token = self._get_access_token(user)
+		videos_list_response = self._tiktok_integration_service.get_videos_list(access_token, None)
+		videos_list.extend(videos_list_response.videos)
+
+		while videos_list_response.has_more is True:
+			cursor = videos_list_response.cursor
+			access_token = self._get_access_token(user)
+			videos_list_response = self._tiktok_integration_service.get_videos_list(access_token, cursor)
+			videos_list.extend(videos_list_response.videos)
+
+		return videos_list
 
 	def get_authorize_url(self, user: User) -> str:
 		csrf_state = self._generate_csrf_state(32)
@@ -59,7 +86,7 @@ class TikTokIntegrationUseCase:
 		authorize_url = (
 			f"https://www.tiktok.com/v2/auth/authorize/"
 			f"?client_key={self._settings.client_key}"
-			f"&scope=user.info.basic"
+			f"&scope=user.info.basic,video.list"
 			f"&response_type=code"
 			f"&redirect_uri={self._settings.redirect_uri}"
 			f"&state={csrf_state}"
@@ -112,11 +139,5 @@ class TikTokIntegrationUseCase:
 
 
 	def sync(self, user: User):
-		access_token = self._token_repository.get_token(user=user, token_type=TikTokTokenType.ACCESS)
-
-		if access_token is None:
-			new_access_token = self._get_access_token(user)
-			self._token_repository.store_token(user, new_access_token)
-			access_token = new_access_token
-
+		videos_list = self._fetch_whole_movies_list(user)
 
