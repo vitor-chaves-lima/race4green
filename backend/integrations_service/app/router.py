@@ -51,3 +51,12 @@ async def tiktok_integration_delete(
 	user = User(user_id="test")
 
 	tiktok_integration_usecase.delete_user(user)
+
+
+@api_router.post("/tiktok/sync", status_code=status.HTTP_204_NO_CONTENT, tags=["TikTok"])
+async def tiktok_integration_sync(
+	tiktok_integration_usecase: TikTokIntegrationUseCase = Depends(get_tiktok_integration_usecase)
+):
+	user = User(user_id="test")
+
+	tiktok_integration_usecase.sync(user)
