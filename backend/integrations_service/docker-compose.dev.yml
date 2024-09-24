@@ -22,7 +22,7 @@ services:
       file: ./docker-compose.base.yml
       service: integrations-service
     environment:
-      TOKEN_DATABASE_CONNECTION_STRING: "redis://:redispass@integrations-service-db:6379/0"
+      TOKEN_DATABASE_CONNECTION_STRING: "redis://:redispass@integrations-service-token-db:6379/0"
       SYNC_DATABASE_CONNECTION_STRING: "mongodb://root:example@integrations-sync-db:27017"
       TIKTOK_TOKEN_URI: https://open.tiktokapis.com/v2/oauth/token/
       TIKTOK_REDIRECT_URI: https://concrete-troll-brightly.ngrok-free.app/integrations/tiktok/callback

@@ -1,6 +1,5 @@
 import os
 from pydantic import BaseModel, RedisDsn
-from pydantic.v1 import MongoDsn
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 

@@ -1,7 +1,10 @@
 import secrets
+import time
+from datetime import datetime
 from typing import List
 
 from core.db.repositories.csrf_state import CSRFStateRepository
+from core.db.repositories.sync import SyncRepository
 from core.db.repositories.tiktok_token import TikTokTokenRepository
 from core.exceptions import CSRFStateException, TokenException
 from core.models.tiktok_integration import TikTokUser, TikTokToken, TikTokTokenType, TikTokIntegrationStatus, \
@@ -14,17 +17,20 @@ from core.settings import TikTokIntegrationSettings
 class TikTokIntegrationUseCase:
 	_settings: TikTokIntegrationSettings
 	_csrf_state_repository: CSRFStateRepository
+	_sync_repository: SyncRepository
 	_token_repository: TikTokTokenRepository
 	_tiktok_integration_service: TikTokIntegrationService
 
 	def __init__(self,
 				 settings: TikTokIntegrationSettings,
 				 csrf_state_repository: CSRFStateRepository,
+				 sync_repository: SyncRepository,
 				 token_repository: TikTokTokenRepository,
 				 tiktok_integration_service: TikTokIntegrationService):
 		self._settings = settings
 		self._csrf_state_repository = csrf_state_repository
 		self._token_repository = token_repository
+		self._sync_repository = sync_repository
 		self._tiktok_integration_service = tiktok_integration_service
 
 
@@ -63,11 +69,11 @@ class TikTokIntegrationUseCase:
 		return access_token
 
 
-	def _fetch_whole_movies_list(self, user: User) -> List[TikTokVideoData]:
+	def _fetch_whole_movies_list(self, user: User, last_sync_timestamp: int) -> List[TikTokVideoData]:
 		videos_list: List[TikTokVideoData] = list[TikTokVideoData]()
 
 		access_token = self._get_access_token(user)
-		videos_list_response = self._tiktok_integration_service.get_videos_list(access_token, None)
+		videos_list_response = self._tiktok_integration_service.get_videos_list(access_token, last_sync_timestamp)
 		videos_list.extend(videos_list_response.videos)
 
 		while videos_list_response.has_more is True:
@@ -139,5 +145,9 @@ class TikTokIntegrationUseCase:
 
 
 	def sync(self, user: User):
-		videos_list = self._fetch_whole_movies_list(user)
+		last_sync_timestamp = self._sync_repository.get_last_sync_timestamp(user)
+		new_sync_timestamp = int(datetime.now().timestamp())
+		videos_list = self._fetch_whole_movies_list(user, last_sync_timestamp)
 
+		if len(videos_list) > 0:
+			self._sync_repository.update_sync_state(user, new_sync_timestamp, videos_list)
