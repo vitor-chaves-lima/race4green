@@ -1,5 +1,5 @@
 import secrets
-import time
+import re
 from datetime import datetime
 from typing import List
 
@@ -20,6 +20,8 @@ class TikTokIntegrationUseCase:
 	_sync_repository: SyncRepository
 	_token_repository: TikTokTokenRepository
 	_tiktok_integration_service: TikTokIntegrationService
+
+	FORMULAE_HASHTAG = r"#FormulaE"
 
 	def __init__(self,
 				 settings: TikTokIntegrationSettings,
@@ -149,8 +151,13 @@ class TikTokIntegrationUseCase:
 		new_sync_timestamp = int(datetime.now().timestamp())
 		videos_list = self._fetch_whole_movies_list(user, last_sync_timestamp)
 
-		if len(videos_list) > 0:
-			self._sync_repository.update_sync_state(user, new_sync_timestamp, videos_list)
+		videos_with_hashtag = []
+		for video in videos_list:
+			if re.search(self.FORMULAE_HASHTAG, video.title):
+				videos_with_hashtag.append(video)
+
+		if len(videos_with_hashtag) > 0:
+			self._sync_repository.update_sync_state(user, new_sync_timestamp, videos_with_hashtag)
 
 
 	def list_videos(self, user: User) -> List[TikTokVideoData]:
