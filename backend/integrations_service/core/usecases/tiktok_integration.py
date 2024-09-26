@@ -144,6 +144,7 @@ class TikTokIntegrationUseCase:
 
 	def delete_user(self, user: User):
 		self._token_repository.clear_user_data(user)
+		self._sync_repository.clear_user_data(user)
 
 
 	def sync(self, user: User):

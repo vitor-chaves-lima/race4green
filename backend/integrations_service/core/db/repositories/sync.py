@@ -44,3 +44,7 @@ class SyncRepository:
 			return []
 
 		return user_document["videos"]
+
+
+	def clear_user_data(self, user: User):
+		self._connector.collection.delete_one({"userId": user.user_id})
