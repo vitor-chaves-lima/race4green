@@ -1,7 +1,8 @@
 from fastapi import APIRouter, Depends, status
 
 from app.dependencies import get_tiktok_integration_usecase
-from app.responses import TikTokIntegrationInitResponseModel, TikTokIntegrationStatusResponseModel
+from app.responses import TikTokIntegrationInitResponseModel, TikTokIntegrationStatusResponseModel, \
+	TikTokIntegrationVideosListResponseModel
 from core.models.user import User
 from core.usecases.tiktok_integration import TikTokIntegrationUseCase
 
@@ -60,3 +61,15 @@ async def tiktok_integration_sync(
 	user = User(user_id="test")
 
 	tiktok_integration_usecase.sync(user)
+
+
+@api_router.get("/tiktok/videos",
+				status_code=status.HTTP_200_OK,
+				response_model=TikTokIntegrationVideosListResponseModel,
+				tags=["TikTok"])
+async def tiktok_list_videos(
+	tiktok_integration_usecase: TikTokIntegrationUseCase = Depends(get_tiktok_integration_usecase)
+):
+	user = User(user_id="test")
+
+	return TikTokIntegrationVideosListResponseModel(videos=tiktok_integration_usecase.list_videos(user))

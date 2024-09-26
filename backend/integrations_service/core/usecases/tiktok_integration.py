@@ -151,3 +151,7 @@ class TikTokIntegrationUseCase:
 
 		if len(videos_list) > 0:
 			self._sync_repository.update_sync_state(user, new_sync_timestamp, videos_list)
+
+
+	def list_videos(self, user: User) -> List[TikTokVideoData]:
+		return self._sync_repository.get_last_sync_videos(user)
