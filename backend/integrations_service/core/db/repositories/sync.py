@@ -39,3 +39,11 @@ class SyncRepository:
 
 		except Exception as e:
 			print(f"Ocorreu um erro: {e}")
+
+
+	def get_last_sync_videos(self, user: User) -> List[TikTokVideoData]:
+		try:
+			videos_list = self._connector.collection.find_one({"userId": user.user_id})["videos"]
+			return videos_list
+		except Exception as e:
+			print(f"Ocorreu um erro: {e}")

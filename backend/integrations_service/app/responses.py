@@ -1,6 +1,8 @@
+from typing import List
+
 from pydantic import BaseModel, Field
 
-from core.models.tiktok_integration import TikTokIntegrationStatus
+from core.models.tiktok_integration import TikTokIntegrationStatus, TikTokVideoData
 
 
 class TikTokIntegrationInitResponseModel(BaseModel):
@@ -9,3 +11,7 @@ class TikTokIntegrationInitResponseModel(BaseModel):
 
 class TikTokIntegrationStatusResponseModel(BaseModel):
     status: TikTokIntegrationStatus
+
+
+class TikTokIntegrationVideosListResponseModel(BaseModel):
+    videos: List[TikTokVideoData]

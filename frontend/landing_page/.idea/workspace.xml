@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8db9e856-6753-42ef-8f11-40e403f58aea" name="Changes" comment="" />
+    <list default="true" id="8db9e856-6753-42ef-8f11-40e403f58aea" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../backend/integrations_service/app/router.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/integrations_service/app/router.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../backend/integrations_service/core/db/repositories/sync.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/integrations_service/core/db/repositories/sync.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../backend/integrations_service/core/usecases/tiktok_integration.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/integrations_service/core/usecases/tiktok_integration.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,20 +25,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;JavaScript Debug.index.html.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;menu-nav&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/vitor/Documents/PROJETOS/race4green/frontend/landing_page&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "JavaScript Debug.index.html.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "R4G-51-criar-endpoint-de-listagem-de-videos",
+    "last_opened_file_path": "C:/Users/vitor/Documents/PROJETOS/race4green/frontend/landing_page",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -52,10 +56,22 @@
       <updated>1727037881182</updated>
       <workItem from="1727037882203" duration="867000" />
       <workItem from="1727116633524" duration="5000" />
+      <workItem from="1727375533084" duration="52000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
