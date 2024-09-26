@@ -21,29 +21,26 @@ class SyncRepository:
 
 
 	def update_sync_state(self, user: User, sync_timestamp: int, new_videos_list: List[TikTokVideoData]):
-		try:
-			dict_videos_list = [v.model_dump() for v in new_videos_list]
+		dict_videos_list = [v.model_dump() for v in new_videos_list]
 
-			self._connector.collection.update_one(
-				{"userId": user.user_id},
-				{
-					"$set": {
-						"last_sync_timestamp": sync_timestamp,
-					},
-					"$addToSet": {
-						"videos": {"$each": dict_videos_list}
-					}
+		self._connector.collection.update_one(
+			{"userId": user.user_id},
+			{
+				"$set": {
+					"last_sync_timestamp": sync_timestamp,
 				},
-				upsert = True
-			)
-
-		except Exception as e:
-			print(f"Ocorreu um erro: {e}")
+				"$addToSet": {
+					"videos": {"$each": dict_videos_list}
+				}
+			},
+			upsert = True
+		)
 
 
 	def get_last_sync_videos(self, user: User) -> List[TikTokVideoData]:
-		try:
-			videos_list = self._connector.collection.find_one({"userId": user.user_id})["videos"]
-			return videos_list
-		except Exception as e:
-			print(f"Ocorreu um erro: {e}")
+		user_document = self._connector.collection.find_one({"userId": user.user_id})
+
+		if user_document is None or "videos" not in user_document:
+			return []
+
+		return user_document["videos"]
