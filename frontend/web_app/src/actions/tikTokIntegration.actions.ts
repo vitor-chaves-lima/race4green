@@ -11,8 +11,14 @@ const TIKTOK_INTEGRATION_INIT = new URL(
 	"/integrations/tiktok/init",
 	API_GATEWAY_URL,
 );
+
 const TIKTOK_INTEGRATION_DISCONNECT = new URL(
 	"/integrations/tiktok",
+	API_GATEWAY_URL,
+);
+
+const TIKTOK_INTEGRATION_SYNC = new URL(
+	"/integrations/tiktok/sync",
 	API_GATEWAY_URL,
 );
 
@@ -49,6 +55,22 @@ const fetcherTiktokIntegrationDisconnectEndpoint = async () => {
 	return null;
 };
 
+const fetcherTiktokIntegrationSyncEndpoint = async () => {
+	const response = await fetch(TIKTOK_INTEGRATION_SYNC, {
+		method: "POST",
+	}).catch((error) => {
+		console.error("Something wrong happened during the request", error);
+		throw new HttpRequestError();
+	});
+
+	if (!response.ok) {
+		const responseJson = await response.json();
+		throw new IntegrationInitError(responseJson.stringify());
+	}
+
+	return null;
+};
+
 /*----------------- ACTIONS -----------------*/
 
 const tikTokIntegrationInitAction: ActionFunction = async () => {
@@ -59,6 +81,14 @@ const tikTokIntegrationDisconnectAction: ActionFunction = async () => {
 	return await fetcherTiktokIntegrationDisconnectEndpoint();
 };
 
+const tikTokIntegrationSyncAction: ActionFunction = async () => {
+	return await fetcherTiktokIntegrationSyncEndpoint();
+};
+
 /*----------------- EXPORTS -----------------*/
 
-export { tikTokIntegrationInitAction, tikTokIntegrationDisconnectAction };
+export {
+	tikTokIntegrationInitAction,
+	tikTokIntegrationDisconnectAction,
+	tikTokIntegrationSyncAction,
+};

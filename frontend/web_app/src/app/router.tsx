@@ -18,11 +18,12 @@ import {
 import {
 	tikTokIntegrationDisconnectAction,
 	tikTokIntegrationInitAction,
+	tikTokIntegrationSyncAction,
 } from "@/actions/tikTokIntegration.actions";
 
 import {
 	tikTokIntegrationCallbackLoader,
-	tikTokIntegrationStatusLoader,
+	tikTokIntegrationLoader,
 } from "@/loaders/tikTokIntegration.loaders";
 
 /*--------------- INTERFACES ----------------*/
@@ -67,7 +68,7 @@ const integrationsRoute: RouteObject = {
 					path: "manage",
 					element: <TikTokIntegrationManagePage />,
 					errorElement: <TikTokIntegrationManageErrorElement />,
-					loader: tikTokIntegrationStatusLoader,
+					loader: tikTokIntegrationLoader,
 				},
 				{
 					path: "callback",
@@ -96,6 +97,10 @@ const integrationsAPIRoute: RouteObject = {
 				{
 					path: "disconnect",
 					action: tikTokIntegrationDisconnectAction,
+				},
+				{
+					path: "sync",
+					action: tikTokIntegrationSyncAction,
 				},
 			],
 		},

@@ -15,13 +15,27 @@ import { API_GATEWAY_URL } from "@/lib/consts.ts";
 
 export type TikTokIntegrationStatus = "connected" | "notConnected";
 
-export type TikTokStatusLoaderReturn = { status: TikTokIntegrationStatus };
+export type TikTokLoaderReturn = {
+	status: TikTokIntegrationStatus;
+	videos: Promise<[TikTokVideo]>;
+};
 export type TikTokCallbackLoaderReturn = { data: Promise<void> };
+
+export type TikTokVideo = {
+	cover_image_url: string;
+	id: string;
+	title: string;
+};
 
 /*---------------- ENDPOINTS ----------------*/
 
 const TIKTOK_INTEGRATION_STATUS = new URL(
 	"/integrations/tiktok",
+	API_GATEWAY_URL,
+);
+
+const TIKTOK_INTEGRATION_VIDEOS = new URL(
+	"/integrations/tiktok/videos",
 	API_GATEWAY_URL,
 );
 
@@ -49,6 +63,23 @@ const fetchIntegrationStatusEndpoint = async () => {
 
 	const responseJson = await response.json();
 	return responseJson["status"];
+};
+
+const fetchIntegrationVideosEndpoint = async (): Promise<[TikTokVideo]> => {
+	const response = await fetch(TIKTOK_INTEGRATION_VIDEOS).catch((error) => {
+		console.error("Something wrong happened during the request", error);
+		throw new HttpRequestError();
+	});
+
+	if (!response.ok) {
+		const errorData = await response.json();
+		console.error("Something wrong happened during the request", errorData);
+		throw new CallbackValidationError(errorData["message"]);
+	}
+
+	const responseJson = await response.json();
+
+	return responseJson["videos"];
 };
 
 const fetchCallbackEndpoint = async (
@@ -88,10 +119,11 @@ const fetchCallbackEndpoint = async (
 
 /*----------------- LOADERS -----------------*/
 
-const tikTokIntegrationStatusLoader: LoaderFunction = async () => {
-	return {
-		status: fetchIntegrationStatusEndpoint(),
-	};
+const tikTokIntegrationLoader: LoaderFunction = async () => {
+	return defer({
+		status: await fetchIntegrationStatusEndpoint(),
+		videos: fetchIntegrationVideosEndpoint(),
+	});
 };
 
 const tikTokIntegrationCallbackLoader: LoaderFunction = async ({
@@ -110,4 +142,4 @@ const tikTokIntegrationCallbackLoader: LoaderFunction = async ({
 
 /*----------------- EXPORTS -----------------*/
 
-export { tikTokIntegrationStatusLoader, tikTokIntegrationCallbackLoader };
+export { tikTokIntegrationLoader, tikTokIntegrationCallbackLoader };
