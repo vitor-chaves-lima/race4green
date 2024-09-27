@@ -8,12 +8,12 @@ import { Toaster } from "@/components/ui/toaster.tsx";
 import { DashboardLayout } from "@/layouts/Dashboard.layout";
 import { IntegrationLayout } from "@/layouts/IntegrationLayout";
 
-import { IntegrationsIndexPage } from "@/pages/integrations/Index.page";
-import { TikTokIntegrationCallbackPage } from "@/pages/integrations/tiktok/TikTokIntegrationCallback.page.tsx";
 import {
 	TikTokIntegrationManageErrorElement,
 	TikTokIntegrationManagePage,
 } from "@/pages/integrations/tiktok/TikTokIntegrationManage.page";
+import { IntegrationsIndexPage } from "@/pages/integrations/Index.page";
+import { TikTokIntegrationCallbackPage } from "@/pages/integrations/tiktok/TikTokIntegrationCallback.page.tsx";
 
 import {
 	tikTokIntegrationDisconnectAction,
