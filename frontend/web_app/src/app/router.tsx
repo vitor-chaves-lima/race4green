@@ -8,21 +8,22 @@ import { Toaster } from "@/components/ui/toaster.tsx";
 import { DashboardLayout } from "@/layouts/Dashboard.layout";
 import { IntegrationLayout } from "@/layouts/IntegrationLayout";
 
-import { IntegrationsIndexPage } from "@/pages/integrations/Index.page";
-import { TikTokIntegrationCallbackPage } from "@/pages/integrations/tiktok/TikTokIntegrationCallback.page.tsx";
 import {
 	TikTokIntegrationManageErrorElement,
 	TikTokIntegrationManagePage,
 } from "@/pages/integrations/tiktok/TikTokIntegrationManage.page";
+import { IntegrationsIndexPage } from "@/pages/integrations/Index.page";
+import { TikTokIntegrationCallbackPage } from "@/pages/integrations/tiktok/TikTokIntegrationCallback.page.tsx";
 
 import {
 	tikTokIntegrationDisconnectAction,
 	tikTokIntegrationInitAction,
+	tikTokIntegrationSyncAction,
 } from "@/actions/tikTokIntegration.actions";
 
 import {
 	tikTokIntegrationCallbackLoader,
-	tikTokIntegrationStatusLoader,
+	tikTokIntegrationLoader,
 } from "@/loaders/tikTokIntegration.loaders";
 
 /*--------------- INTERFACES ----------------*/
@@ -67,7 +68,7 @@ const integrationsRoute: RouteObject = {
 					path: "manage",
 					element: <TikTokIntegrationManagePage />,
 					errorElement: <TikTokIntegrationManageErrorElement />,
-					loader: tikTokIntegrationStatusLoader,
+					loader: tikTokIntegrationLoader,
 				},
 				{
 					path: "callback",
@@ -96,6 +97,10 @@ const integrationsAPIRoute: RouteObject = {
 				{
 					path: "disconnect",
 					action: tikTokIntegrationDisconnectAction,
+				},
+				{
+					path: "sync",
+					action: tikTokIntegrationSyncAction,
 				},
 			],
 		},
