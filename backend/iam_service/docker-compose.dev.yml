@@ -1,0 +1,25 @@
+services:
+  iam-service-db:
+    extends:
+      file: ./docker-compose.base.yml
+      service: iam-service-db
+    environment:
+        POSTGRES_USER: test
+        POSTGRES_PASSWORD: test
+        POSTGRES_DB: iam
+    ports:
+      - "5001:5432"
+
+  iam-service:
+    extends:
+      file: ./docker-compose.base.yml
+      service: iam-service
+    environment:
+        POSTGRES_URL: "postgresql://test:test@iam-service-db:5432/iam"
+        REFRESH_TOKEN_SECRET: test_refresh
+        ACCESS_TOKEN_SECRET: test_access
+    volumes:
+      - .:/usr/src
+    ports:
+        - "5000:8000"
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000
