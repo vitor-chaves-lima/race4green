@@ -31,7 +31,9 @@ async def sign_in(request: SignInRequestPayload, auth_usecase: AuthUseCase = Dep
 	password = request.password
 
 	refresh_token, access_token, access_token_expires_at = auth_usecase.sign_in(email, password)
-	return SignInResponse(refresh_token=refresh_token, access_token=access_token, access_token_expires_at=access_token_expires_at)
+	return SignInResponse(refresh_token=refresh_token,
+						  access_token=access_token,
+						  access_token_expires_at=access_token_expires_at)
 
 
 @api_router.post("/refresh", tags=["IAM"],status_code=status.HTTP_200_OK,
