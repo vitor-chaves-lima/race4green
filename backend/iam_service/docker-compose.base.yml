@@ -1,0 +1,10 @@
+services:
+  iam-service-db:
+    image: postgres:latest
+
+  iam-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - iam-service-db
