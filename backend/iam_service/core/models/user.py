@@ -1,10 +1,15 @@
 import datetime
 import uuid
 import bcrypt
+from pydantic import BaseModel
 
-from sqlalchemy import Column, DateTime, String, Uuid, func
+from sqlalchemy import Column, DateTime, String, Uuid, func, Integer
 
 from core import Base
+
+
+class UserPublicData(BaseModel):
+	id: uuid.UUID
 
 
 class User(Base):
@@ -13,8 +18,12 @@ class User(Base):
 	id: uuid.UUID = Column(Uuid, primary_key=True, default=uuid.uuid4)
 	email = Column(String, unique=True, nullable=False)
 	password_hash = Column(String, nullable=False)
+	character_gender = Column(String, nullable=False)
+	character_hair_index = Column(Integer, nullable=False)
+	character_shirt_index = Column(Integer, nullable=False)
+	character_pants_index = Column(Integer, nullable=False)
 	created_at: datetime = Column(DateTime(timezone=True), default=func.now())
-	updated_at: datetime = Column(DateTime(timezone=True), nullable=True)
+	updated_at: datetime = Column(DateTime(timezone=True), nullable=True, default=func.now())
 
 	def set_password(self, password):
 		self.password_hash = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')

@@ -16,6 +16,8 @@ services:
       service: iam-service
     environment:
         POSTGRES_URL: "postgresql://test:test@iam-service-db:5432/iam"
+        REFRESH_TOKEN_SECRET: test
+        ACCESS_TOKEN_SECRET: test
     volumes:
       - .:/usr/src
     ports:
