@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, status
+	from fastapi import APIRouter, Depends, status
 
 from app.dependencies import get_tiktok_integration_usecase
 from app.responses import TikTokIntegrationInitResponseModel, TikTokIntegrationStatusResponseModel, \
