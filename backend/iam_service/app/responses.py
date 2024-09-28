@@ -18,5 +18,5 @@ class SignInResponse(BaseModel):
 
 
 class RefreshResponse(BaseModel):
-    accessToken: str = Field(serialization_alias="access_token")
-    accessTokenExpiresAt: int = Field(serialization_alias="access_token_expires_at")
+    access_token: str = Field(serialization_alias="accessToken")
+    access_token_expires_at: int = Field(serialization_alias="accessTokenExpiresAt")

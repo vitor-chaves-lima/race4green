@@ -1,6 +1,6 @@
 from core.db.repositories.users import UsersRepository
 from core.exceptions import InvalidPasswordConfirmException, EmailExistsException, EmailNotFoundException, \
-	InvalidCredentialsException
+	InvalidCredentialsException, InvalidRefreshTokenException
 from core.models.user import User
 from core.utils.token import TokenUtils
 
@@ -54,3 +54,15 @@ class AuthUseCase:
 		access_token_expire = 900
 
 		return refresh_token, access_token, access_token_expire
+
+
+	def refresh_token(self, refresh_token: str):
+		is_refresh_token_valid, user_id = self._token_utils.validate_refresh_token(refresh_token)
+
+		if not is_refresh_token_valid:
+			raise InvalidRefreshTokenException()
+
+		access_token = self._token_utils.create_access_token(user_id)
+		access_token_expire = 900
+
+		return access_token, access_token_expire

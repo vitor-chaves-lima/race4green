@@ -41,7 +41,7 @@ class TokenUtils:
 		return encoded_jwt
 
 
-	def validate_refresh_token(self, refresh_token: str) -> bool:
+	def validate_refresh_token(self, refresh_token: str) -> (bool, str):
 		try:
 			decoded_token = jwt.decode(refresh_token, self._refresh_token_secret, algorithms=["HS256"])
 
@@ -51,7 +51,8 @@ class TokenUtils:
 			if now > exp:
 				raise ExpiredRefreshTokenException()
 
-			return True
+			user_id = decoded_token["userId"]
+			return True, user_id
 
 		except jwt.ExpiredSignatureError:
 			raise ExpiredRefreshTokenException()

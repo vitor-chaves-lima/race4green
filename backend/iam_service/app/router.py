@@ -38,8 +38,12 @@ async def sign_in(request: SignInRequestPayload, auth_usecase: AuthUseCase = Dep
 
 @api_router.post("/refresh", tags=["IAM"],status_code=status.HTTP_200_OK,
 				 response_model=RefreshResponse)
-async def refresh(request: RefreshRequestPayload):
-	...
+async def refresh(request: RefreshRequestPayload, auth_usecase: AuthUseCase = Depends(get_auth_usecase)):
+	refresh_token = request.refresh_token
+
+	access_token, access_token_expires_at = auth_usecase.refresh_token(refresh_token)
+	return RefreshResponse(access_token=access_token,
+						  access_token_expires_at=access_token_expires_at)
 
 
 @api_router.get("/user-data", tags=["IAM"])
