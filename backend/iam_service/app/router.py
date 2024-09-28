@@ -3,7 +3,7 @@ from fastapi import APIRouter
 
 api_router = APIRouter()
 
-@api_router.get("/sign-in", tags=["IAM"])
+@api_router.post("/sign-in", tags=["IAM"])
 async def sign_in():
     ...
 
