@@ -8,8 +8,11 @@ async def email_exists_exception_handler(_: Request, exc: EmailExistsException):
     return JSONResponse(
         status_code=status.HTTP_400_BAD_REQUEST,
         content={
-            "message": f"Email already registered: {exc.email}",
-            "error": EmailExistsException.__name__
+            "message": f"E-mail já cadastrado: {exc.email}",
+            "error": {
+				"type": EmailExistsException.__name__,
+				"description": "Email already exists",
+			}
         },
     )
 
@@ -18,8 +21,11 @@ async def invalid_password_confirm_exception_handler(_: Request, exc: InvalidPas
     return JSONResponse(
         status_code=status.HTTP_400_BAD_REQUEST,
         content={
-            "message": f"Invalid password confirm",
-            "error": InvalidPasswordConfirmException.__name__
+            "message": f"Confirmação de senha inválida",
+            "error": {
+				"type": InvalidPasswordConfirmException.__name__,
+				"description": "Invalid password confirm",
+			}
         },
     )
 
@@ -29,7 +35,10 @@ async def email_not_found_exception_handler(_: Request, exc: EmailNotFoundExcept
         status_code=status.HTTP_400_BAD_REQUEST,
         content={
             "message": f"Email {exc.email} not found. Please check the email address and try again.",
-            "error": EmailNotFoundException.__name__
+            "error": {
+				"type": EmailNotFoundException.__name__,
+				"description": "Email not found",
+			}
         },
     )
 
@@ -38,8 +47,11 @@ async def invalid_credentials_exception_handler(_: Request, exc: InvalidCredenti
     return JSONResponse(
         status_code=status.HTTP_400_BAD_REQUEST,
         content={
-            "message": "Invalid credentials",
-            "error": InvalidCredentialsException.__name__
+            "message": "Credenciais inválidas",
+            "error": {
+				"type": InvalidCredentialsException.__name__,
+				"description": "Invalid credentials",
+			}
         },
     )
 
@@ -48,8 +60,11 @@ async def expired_refresh_token_exception_handler(_: Request, exc: ExpiredRefres
     return JSONResponse(
         status_code=status.HTTP_400_BAD_REQUEST,
         content={
-            "message": "Expired refresh token",
-            "error": ExpiredRefreshTokenException.__name__
+            "message": "Refresh token expirado",
+            "error": {
+				"type": ExpiredRefreshTokenException.__name__,
+				"description": "Expired refresh token",
+			}
         },
     )
 
@@ -58,8 +73,11 @@ async def invalid_refresh_token_exception_handler(_: Request, exc: InvalidRefres
     return JSONResponse(
         status_code=status.HTTP_400_BAD_REQUEST,
         content={
-            "message": "Invalid refresh token",
-            "error": InvalidRefreshTokenException.__name__
+            "message": "Refresh token inválido",
+            "error": {
+				"type": InvalidRefreshTokenException.__name__,
+				"description": "Invalid refresh token",
+			}
         },
     )
 
@@ -68,8 +86,11 @@ async def expired_access_token_exception_handler(_: Request, exc: ExpiredAccessT
     return JSONResponse(
         status_code=status.HTTP_400_BAD_REQUEST,
         content={
-            "message": "Expired access token",
-            "error": ExpiredAccessTokenException.__name__
+            "message": "Access token expirado",
+            "error": {
+				"type": ExpiredAccessTokenException.__name__,
+				"description": "Expired access token",
+			}
         },
     )
 
@@ -78,8 +99,11 @@ async def invalid_access_token_exception_handler(_: Request, exc: InvalidAccessT
     return JSONResponse(
         status_code=status.HTTP_400_BAD_REQUEST,
         content={
-            "message": "Invalid access token",
-            "error": InvalidAccessTokenException.__name__
+            "message": "Access token inválido",
+            "error": {
+				"type": InvalidAccessTokenException.__name__,
+				"description": "Invalid access token",
+			}
         },
     )
 
