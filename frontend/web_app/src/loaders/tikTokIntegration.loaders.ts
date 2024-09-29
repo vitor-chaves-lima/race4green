@@ -10,6 +10,7 @@ import {
 } from "@/lib/exceptions.ts";
 
 import { API_GATEWAY_URL } from "@/lib/consts.ts";
+import { getAccessToken } from "@/lib/auth.ts";
 
 /*------------------ TYPES ------------------*/
 
@@ -50,6 +51,9 @@ const TIKTOK_INTEGRATION_CALLBACK = (code: string, state: string) =>
 const fetchIntegrationStatusEndpoint = async () => {
 	const response = await fetch(TIKTOK_INTEGRATION_STATUS, {
 		method: "GET",
+		headers: {
+			Authorization: `Bearer ${await getAccessToken()}`,
+		},
 	}).catch((error) => {
 		console.error("Something wrong happened during the request", error);
 		throw new HttpRequestError();
@@ -66,7 +70,11 @@ const fetchIntegrationStatusEndpoint = async () => {
 };
 
 const fetchIntegrationVideosEndpoint = async (): Promise<[TikTokVideo]> => {
-	const response = await fetch(TIKTOK_INTEGRATION_VIDEOS).catch((error) => {
+	const response = await fetch(TIKTOK_INTEGRATION_VIDEOS, {
+		headers: {
+			Authorization: `Bearer ${await getAccessToken()}`,
+		},
+	}).catch((error) => {
 		console.error("Something wrong happened during the request", error);
 		throw new HttpRequestError();
 	});
@@ -103,6 +111,9 @@ const fetchCallbackEndpoint = async (
 
 	const response = await fetch(TIKTOK_INTEGRATION_CALLBACK(code, state), {
 		method: "POST",
+		headers: {
+			Authorization: `Bearer ${await getAccessToken()}`,
+		},
 	}).catch((error) => {
 		console.error("Something wrong happened during the request", error);
 		throw new HttpRequestError();

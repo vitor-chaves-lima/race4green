@@ -4,6 +4,7 @@ import { ActionFunction, redirect } from "react-router-dom";
 
 import { HttpRequestError, IntegrationInitError } from "@/lib/exceptions.ts";
 import { API_GATEWAY_URL } from "@/lib/consts.ts";
+import { getAccessToken } from "@/lib/auth.ts";
 
 /*---------------- ENDPOINTS ----------------*/
 
@@ -25,7 +26,11 @@ const TIKTOK_INTEGRATION_SYNC = new URL(
 /*----------------- FETCHERS ----------------*/
 
 const fetcherTiktokIntegrationInitEndpoint = async () => {
-	const response = await fetch(TIKTOK_INTEGRATION_INIT).catch((error) => {
+	const response = await fetch(TIKTOK_INTEGRATION_INIT, {
+		headers: {
+			Authorization: `Bearer ${await getAccessToken()}`,
+		},
+	}).catch((error) => {
 		console.error("Something wrong happened during the request", error);
 		throw new HttpRequestError();
 	});
@@ -42,6 +47,9 @@ const fetcherTiktokIntegrationInitEndpoint = async () => {
 const fetcherTiktokIntegrationDisconnectEndpoint = async () => {
 	const response = await fetch(TIKTOK_INTEGRATION_DISCONNECT, {
 		method: "DELETE",
+		headers: {
+			Authorization: `Bearer ${await getAccessToken()}`,
+		},
 	}).catch((error) => {
 		console.error("Something wrong happened during the request", error);
 		throw new HttpRequestError();
@@ -58,6 +66,9 @@ const fetcherTiktokIntegrationDisconnectEndpoint = async () => {
 const fetcherTiktokIntegrationSyncEndpoint = async () => {
 	const response = await fetch(TIKTOK_INTEGRATION_SYNC, {
 		method: "POST",
+		headers: {
+			Authorization: `Bearer ${await getAccessToken()}`,
+		},
 	}).catch((error) => {
 		console.error("Something wrong happened during the request", error);
 		throw new HttpRequestError();

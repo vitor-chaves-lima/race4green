@@ -1,6 +1,11 @@
 /*----------------- IMPORTS -----------------*/
 
-import { RouteObject, createBrowserRouter } from "react-router-dom";
+import {
+	Navigate,
+	Outlet,
+	RouteObject,
+	createBrowserRouter,
+} from "react-router-dom";
 import { icons } from "lucide-react";
 
 import { Toaster } from "@/components/ui/toaster.tsx";
@@ -25,6 +30,11 @@ import {
 	tikTokIntegrationCallbackLoader,
 	tikTokIntegrationLoader,
 } from "@/loaders/tikTokIntegration.loaders";
+import { AuthLayout } from "@/layouts/Auth.layout.tsx";
+import { SignInPage } from "@/pages/auth/sign-in.page.tsx";
+import { signInAction } from "@/actions/auth.actions.ts";
+
+import { authLoader, dashboardLoader } from "@/loaders/auth.loaders.ts";
 
 /*--------------- INTERFACES ----------------*/
 
@@ -53,11 +63,11 @@ const integrationsRoute: RouteObject = {
 			element: (
 				<IntegrationLayout
 					title="TikTok"
-					backButtonPath="/integrations"
+					backButtonPath="/dashboard/integrations"
 					subRouteTitles={
 						new Map([
-							["/integrations/tiktok/manage", "Gerenciar"],
-							["/integrations/tiktok/about", "Saiba Mais"],
+							["tiktok/manage", "Gerenciar"],
+							["tiktok/about", "Saiba Mais"],
 						])
 					}
 				/>
@@ -84,23 +94,64 @@ const integrationsRoute: RouteObject = {
 	],
 };
 
-const integrationsAPIRoute: RouteObject = {
-	path: "/api/integrations",
+const dashboardRoutes: RouteObject = {
+	path: "/dashboard",
+	loader: dashboardLoader,
+	element: (
+		<>
+			<DashboardLayout />
+		</>
+	),
+	children: [collectiblesRoute, integrationsRoute],
+};
+
+const authRoutes: RouteObject = {
+	path: "/auth",
+	loader: authLoader,
+	element: (
+		<>
+			<AuthLayout />
+		</>
+	),
 	children: [
 		{
-			path: "tiktok",
+			path: "sign-in",
+			element: <SignInPage />,
+		},
+	],
+};
+
+const apiRoutes: RouteObject = {
+	path: "/api",
+	children: [
+		{
+			path: "integrations",
 			children: [
 				{
-					path: "init",
-					action: tikTokIntegrationInitAction,
+					path: "tiktok",
+					children: [
+						{
+							path: "init",
+							action: tikTokIntegrationInitAction,
+						},
+						{
+							path: "disconnect",
+							action: tikTokIntegrationDisconnectAction,
+						},
+						{
+							path: "sync",
+							action: tikTokIntegrationSyncAction,
+						},
+					],
 				},
+			],
+		},
+		{
+			path: "iam",
+			children: [
 				{
-					path: "disconnect",
-					action: tikTokIntegrationDisconnectAction,
-				},
-				{
-					path: "sync",
-					action: tikTokIntegrationSyncAction,
+					path: "sign-in",
+					action: signInAction,
 				},
 			],
 		},
@@ -114,11 +165,19 @@ const router = createBrowserRouter([
 		path: "/",
 		element: (
 			<>
-				<DashboardLayout />
+				<Outlet />
 				<Toaster />
 			</>
 		),
-		children: [collectiblesRoute, integrationsRoute, integrationsAPIRoute],
+		children: [
+			{
+				index: true,
+				element: <Navigate to="/dashboard" replace={true}></Navigate>,
+			},
+			apiRoutes,
+			authRoutes,
+			dashboardRoutes,
+		],
 	},
 ]);
 
@@ -128,14 +187,14 @@ const menuItems: MenuItem[] = [
 	{
 		icon: "BookHeart",
 		label: "Colecionáveis",
-		to: `/${collectiblesRoute.path}`,
+		to: `${collectiblesRoute.path}`,
 		selectCheck: (pathname: string) =>
 			pathname.includes(`${collectiblesRoute.path}`),
 	},
 	{
 		icon: "Cable",
 		label: "Integrações",
-		to: `/${integrationsRoute.path}`,
+		to: `${integrationsRoute.path}`,
 		selectCheck: (pathname: string) => {
 			return pathname.includes(`${integrationsRoute.path}`);
 		},

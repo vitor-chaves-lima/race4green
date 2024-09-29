@@ -45,7 +45,7 @@ const IntegrationListPlatformCard: React.FC<IntegrationListCardProps> = ({
 						</Button>
 					</Link>
 
-					<Link to={"/integrations/tiktok/manage"}>
+					<Link to={"tiktok/manage"}>
 						<Button
 							variant="secondary"
 							className="w-full text-lg rounded-xl"
@@ -91,7 +91,7 @@ const IntegrationsIndexPage: React.FC = () => {
 					logo={TikTokLogo}
 					platformName="Tik Tok"
 					description="Plataforma de vídeos curtos"
-					aboutPath="/integrations/tiktok/about"
+					aboutPath="tiktok/about"
 				/>
 			</div>
 		</div>
