@@ -51,7 +51,7 @@ const TikTokIntegrationManageErrorElement = () => {
 	}, [error]);
 
 	useEffect(() => {
-		navigate("/integrations/tiktok/manage", {
+		navigate("/dashboard/integrations", {
 			replace: true,
 			state: {
 				toastData: {
@@ -81,7 +81,7 @@ const TikTokIntegrationManageLoaderErrorElement = () => {
 	}, [error]);
 
 	useEffect(() => {
-		navigate("/integrations", {
+		navigate("dashboard/integrations", {
 			replace: true,
 			state: {
 				toastData: {
