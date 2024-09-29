@@ -19,3 +19,7 @@ class SignInRequestPayload(BaseModel):
 
 class RefreshRequestPayload(BaseModel):
     refresh_token: str = Field(alias="refreshToken")
+
+
+class AuthorizeRequest(BaseModel):
+    access_token: str = Field(alias="accessToken")
