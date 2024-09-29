@@ -4,6 +4,7 @@ import { ActionFunction, ActionFunctionArgs, redirect } from "react-router-dom";
 
 import { HttpRequestError, IntegrationInitError } from "@/lib/exceptions.ts";
 import { API_GATEWAY_URL } from "@/lib/consts.ts";
+import { setTokens } from "@/lib/auth.ts";
 
 /*---------------- ENDPOINTS ----------------*/
 
@@ -30,12 +31,14 @@ const fetcherSignInEndpoint = async (email: string, password: string) => {
 
 	const responseJson = await response.json();
 
-	localStorage.setItem("accessToken", responseJson["accessToken"]);
-	localStorage.setItem(
-		"accessTokenExpiresAt",
-		responseJson["accessTokenExpiresAt"],
+	const currentTimestamp = Math.floor(Date.now() / 1000);
+	const expiresAt = currentTimestamp + responseJson["accessTokenExpiresAt"];
+
+	setTokens(
+		responseJson["accessToken"],
+		expiresAt,
+		responseJson["refreshToken"],
 	);
-	localStorage.setItem("refreshToken", responseJson["refreshToken"]);
 
 	return redirect("/dashboard");
 };
