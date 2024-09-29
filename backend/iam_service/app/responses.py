@@ -27,3 +27,7 @@ class UserDataResponse(BaseModel):
     character_hair_index: int = Field(serialization_alias="characterHairIndex")
     character_shirt_index: int = Field(serialization_alias="characterShirtIndex")
     character_pants_index: int = Field(serialization_alias="characterPantsIndex")
+
+
+class AuthorizeResponse(BaseModel):
+    user_id: str = Field(serialization_alias="userId")

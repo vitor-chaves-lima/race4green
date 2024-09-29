@@ -3,8 +3,8 @@ from fastapi.params import Depends
 
 from app.dependencies import get_auth_usecase
 from app.middlewares import authorize
-from app.requests import SignUpRequestPayload, SignInRequestPayload, RefreshRequestPayload
-from app.responses import RefreshResponse, ErrorResponse, SignInResponse, UserDataResponse
+from app.requests import SignUpRequestPayload, SignInRequestPayload, RefreshRequestPayload, AuthorizeRequest
+from app.responses import RefreshResponse, ErrorResponse, SignInResponse, UserDataResponse, AuthorizeResponse
 from core.usecases.auth import AuthUseCase
 
 api_router = APIRouter()
@@ -57,6 +57,7 @@ async def get_user_data(user_id: str = Depends(authorize), auth_usecase: AuthUse
 							character_pants_index=pants)
 
 
-@api_router.post("/authorize", tags=["Internal"])
-async def authorize_user():
-	...
+@api_router.post("/authorize", tags=["Internal"], response_model=AuthorizeResponse)
+async def authorize_user(request: AuthorizeRequest, auth_usecase: AuthUseCase = Depends(get_auth_usecase)):
+	user_id = auth_usecase.validate_access_token(access_token=request.access_token)
+	return AuthorizeResponse(user_id=user_id)
