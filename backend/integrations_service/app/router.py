@@ -7,7 +7,7 @@ from app.responses import TikTokIntegrationInitResponseModel, TikTokIntegrationS
 from core.models.user import User
 from core.usecases.tiktok_integration import TikTokIntegrationUseCase
 
-api_router = APIRouter()
+api_router = APIRouter(prefix="/integrations")
 
 @api_router.get("/tiktok/init",
 				responses={

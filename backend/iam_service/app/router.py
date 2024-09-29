@@ -7,8 +7,7 @@ from app.requests import SignUpRequestPayload, SignInRequestPayload, RefreshRequ
 from app.responses import RefreshResponse, ErrorResponse, SignInResponse, UserDataResponse, AuthorizeResponse
 from core.usecases.auth import AuthUseCase
 
-api_router = APIRouter()
-
+api_router = APIRouter(prefix="/iam")
 
 @api_router.post("/sign-up", tags=["IAM"], status_code=status.HTTP_201_CREATED,
 				 responses={400: {"model": ErrorResponse}})
