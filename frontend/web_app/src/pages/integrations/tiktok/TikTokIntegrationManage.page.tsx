@@ -304,7 +304,7 @@ const TikTokIntegrationManageConnectedContent = ({
 							return (
 								<div className="grid grid-cols-3 gap-7">
 									{resolvedVideos.map((v) => (
-										<TikTokVideoCard {...v} />
+										<TikTokVideoCard key={v.id} {...v} />
 									))}
 								</div>
 							);

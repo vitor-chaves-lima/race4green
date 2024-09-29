@@ -33,6 +33,7 @@ services:
     - /iam/refresh
     methods:
     - POST
+    - OPTIONS
     strip_path: false
 
   - name: user-data
@@ -40,6 +41,7 @@ services:
     - /iam/user-data
     methods:
     - GET
+    - OPTIONS
     strip_path: false
 
 - name: integrations
@@ -52,4 +54,5 @@ services:
       - GET
       - POST
       - DELETE
+      - OPTIONS
     strip_path: false

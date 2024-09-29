@@ -88,7 +88,7 @@ services:
       TOKEN_DATABASE_CONNECTION_STRING: "redis://:redispass@integrations-service-token-db:6379/0"
       SYNC_DATABASE_CONNECTION_STRING: "mongodb://root:example@integrations-sync-db:27017"
       TIKTOK_TOKEN_URI: https://open.tiktokapis.com/v2/oauth/token/
-      TIKTOK_REDIRECT_URI: https://concrete-troll-brightly.ngrok-free.app/integrations/tiktok/callback
+      TIKTOK_REDIRECT_URI: https://concrete-troll-brightly.ngrok-free.app/dashboard/integrations/tiktok/callback
       TIKTOK_CLIENT_KEY: sbawgik9wknh769zea
       TIKTOK_CLIENT_SECRET: ntnIeAlvnKPC6tTIXTQpsi4kws3D7ewv
       IAM_SERVICE_URL: "http://iam-service:8000/iam"

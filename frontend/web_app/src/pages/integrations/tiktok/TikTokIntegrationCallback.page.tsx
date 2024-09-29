@@ -42,7 +42,7 @@ const TikTokIntegrationCallbackErrorElement: React.FC = () => {
 	}, [error]);
 
 	useEffect(() => {
-		navigate("/tiktok/manage", {
+		navigate("/dashboard/integrations/tiktok/manage", {
 			replace: true,
 			state: {
 				toastData: {
@@ -61,7 +61,7 @@ const TikTokIntegrationCallbackSuccessElement = () => {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		navigate("/tiktok/manage", {
+		navigate("/dashboard/integrations/tiktok/manage", {
 			replace: true,
 			state: {
 				toastData: {
