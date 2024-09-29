@@ -28,6 +28,7 @@ import {
 import { AuthLayout } from "@/layouts/Auth.layout.tsx";
 import { SignInPage } from "@/pages/auth/sign-in.page.tsx";
 import { signInAction } from "@/actions/auth.actions.ts";
+import { authLoader, dashboardLoader } from "@/loaders/auth.loaders.ts";
 
 /*--------------- INTERFACES ----------------*/
 
@@ -89,6 +90,7 @@ const integrationsRoute: RouteObject = {
 
 const dashboardRoutes: RouteObject = {
 	path: "/dashboard",
+	loader: dashboardLoader,
 	element: (
 		<>
 			<DashboardLayout />
@@ -99,6 +101,7 @@ const dashboardRoutes: RouteObject = {
 
 const authRoutes: RouteObject = {
 	path: "/auth",
+	loader: authLoader,
 	element: (
 		<>
 			<AuthLayout />

@@ -1,8 +1,8 @@
 /*----------------- IMPORTS -----------------*/
 
-import React, { useEffect } from "react";
+import React from "react";
 
-import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
 import { MenuItem, menuItems } from "@/app/router";
 import { icons } from "lucide-react";
 
@@ -97,22 +97,6 @@ const NavMenu: React.FC = () => {
 /*---------------- COMPONENT ----------------*/
 
 const DashboardLayout: React.FC = () => {
-	const navigate = useNavigate();
-
-	useEffect(() => {
-		const accessToken = localStorage.getItem("accessToken");
-		const accessTokenExpiresAt = localStorage.getItem(
-			"accessTokenExpiresAt",
-		);
-		const refreshToken = localStorage.getItem("refreshToken");
-
-		if (!accessToken || !accessTokenExpiresAt || !refreshToken) {
-			navigate("/auth/sign-in", {
-				replace: true,
-			});
-		}
-	}, []);
-
 	return (
 		<div className="grid min-h-screen w-full sm:grid-cols-[100px_1fr] lg:grid-cols-[280px_1fr]">
 			<div className="border-r hidden sm:block">
