@@ -2,9 +2,22 @@
 
 import React from "react";
 
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { MenuItem, menuItems } from "@/app/router";
 import { icons } from "lucide-react";
+
+import {
+	Dialog,
+	DialogClose,
+	DialogContent,
+	DialogDescription,
+	DialogFooter,
+	DialogHeader,
+	DialogTitle,
+	DialogTrigger,
+} from "@/components/ui/dialog.tsx";
+import { Button } from "@/components/ui/button.tsx";
+import { clearTokens } from "@/lib/auth.ts";
 
 /*-------------- INTERFACES --------------*/
 
@@ -84,13 +97,53 @@ const NavMenu: React.FC = () => {
 					/>
 				))}
 
-				<NavMenuAction
-					icon="LogOut"
-					label="Sair"
-					onClick={() => alert("TODO: Implement logout")}
-				/>
+				<LogOut />
 			</ul>
 		</nav>
+	);
+};
+
+const LogOut = () => {
+	const navigate = useNavigate();
+
+	const handledDisconnectButtonClick = () => {
+		clearTokens();
+		navigate(0);
+	};
+
+	return (
+		<Dialog modal>
+			<DialogTrigger asChild>
+				<NavMenuAction icon="LogOut" label="Sair" />
+			</DialogTrigger>
+			<DialogContent
+				onInteractOutside={(e) => {
+					e.preventDefault();
+				}}
+			>
+				<DialogHeader>
+					<DialogTitle>Desconectar?</DialogTitle>
+				</DialogHeader>
+				<DialogDescription className="text-md my-3 text-foreground">
+					Você será desconectado da plataforma. Deseja continuar?
+				</DialogDescription>
+				<DialogFooter>
+					<DialogClose asChild>
+						<Button variant="secondary" className="rounded">
+							Cancelar
+						</Button>
+					</DialogClose>
+
+					<Button
+						variant="destructive"
+						className="rounded"
+						onClick={handledDisconnectButtonClick}
+					>
+						Desconectar
+					</Button>
+				</DialogFooter>
+			</DialogContent>
+		</Dialog>
 	);
 };
 
