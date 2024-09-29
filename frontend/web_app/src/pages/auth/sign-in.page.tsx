@@ -2,6 +2,8 @@
 
 import React, { FormEvent, useState } from "react";
 
+import FormulaECarImage from "@/assets/images/formula-e-car.png";
+
 import { Button } from "@/components/ui/button.tsx";
 import { Input } from "@/components/ui/input";
 import { ReloadIcon } from "@radix-ui/react-icons";
@@ -33,12 +35,14 @@ const SignInPage: React.FC = () => {
 	};
 
 	return (
-		<div className="grid grid-cols-2 h-full w-full gap-8 ">
-			<div></div>
+		<div className="grid lg:grid-cols-2 grid-cols-1 h-full w-full gap-8">
+			<div className="justify-center items-center hidden lg:flex">
+				<img src={FormulaECarImage} alt="Carro Fórmula E" />
+			</div>
 
 			<div className="flex flex-col gap-16 items-center justify-center">
 				<form
-					className="flex flex-col w-full min-w-80 max-w-96 gap-14 border-white border p-14 py-24 box-content rounded-2xl"
+					className="flex flex-col w-full lg:min-w-80 lg:max-w-96 gap-14 border-white border p-14 py-24 lg:box-content rounded-2xl"
 					onSubmit={handleSubmit}
 				>
 					<div className="flex flex-col items-center gap-3">
