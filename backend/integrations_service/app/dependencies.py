@@ -25,3 +25,11 @@ tiktok_integration_usecase = TikTokIntegrationUseCase(
 
 def get_tiktok_integration_usecase() -> TikTokIntegrationUseCase:
 	return tiktok_integration_usecase
+
+
+def get_env():
+	return settings.env
+
+
+def get_iam_service_url():
+	return settings.iam_service_url

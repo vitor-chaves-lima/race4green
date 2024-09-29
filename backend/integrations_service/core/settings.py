@@ -16,6 +16,7 @@ class TikTokIntegrationSettings(BaseModel):
 class Settings(BaseSettings):
 	env: str = os.getenv("ENV", "dev")
 
+	iam_service_url: str = os.getenv("IAM_SERVICE_URL")
 	tiktok_integration: TikTokIntegrationSettings = TikTokIntegrationSettings()
 
 	model_config = SettingsConfigDict(env_prefix='integrations_service')

@@ -28,6 +28,7 @@ services:
       TIKTOK_REDIRECT_URI: https://concrete-troll-brightly.ngrok-free.app/integrations/tiktok/callback
       TIKTOK_CLIENT_KEY: sbawgik9wknh769zea
       TIKTOK_CLIENT_SECRET: ntnIeAlvnKPC6tTIXTQpsi4kws3D7ewv
+      IAM_SERVICE_URL: "test"
     volumes:
       - .:/usr/src
     ports:
