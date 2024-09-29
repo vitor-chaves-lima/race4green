@@ -60,7 +60,7 @@ class TokenUtils:
 			raise InvalidRefreshTokenException()
 
 
-	def validate_access_token(self, access_token: str) -> UserPublicData:
+	def validate_access_token(self, access_token: str) -> (bool, str):
 		try:
 			decoded_token = jwt.decode(access_token, self._access_token_secret, algorithms=["HS256"])
 
@@ -70,7 +70,7 @@ class TokenUtils:
 			if now > exp:
 				raise ExpiredAccessTokenException()
 
-			return UserPublicData(id=decoded_token['id'])
+			return True, decoded_token["userId"]
 
 		except jwt.ExpiredSignatureError:
 			raise ExpiredAccessTokenException()

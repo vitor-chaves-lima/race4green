@@ -5,8 +5,11 @@ networks:
   internal-network:
     internal: true
 
-  integrations-service-network:
+  iam-service-network:
     internal: true
+
+  integrations-service-network:
+      internal: true
 
 services:
   gateway-db:
@@ -65,6 +68,31 @@ services:
       - internal-network
       - app-network
 
+  iam-service-db:
+    extends:
+      file: ./backend/iam_service/docker-compose.base.yml
+      service: iam-service-db
+    environment:
+      POSTGRES_USER: test
+      POSTGRES_PASSWORD: test
+      POSTGRES_DB: iam
+    networks:
+      - iam-service-network
+
+  iam-service:
+    extends:
+      file: ./backend/iam_service/docker-compose.base.yml
+      service: iam-service
+    environment:
+      POSTGRES_URL: "postgresql://test:test@iam-service-db:5432/iam"
+      REFRESH_TOKEN_SECRET: test_refresh
+      ACCESS_TOKEN_SECRET: test_access
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --root-path /iam
+    networks:
+        - iam-service-network
+        - internal-network
+        - app-network
+
   integrations-service-token-db:
     extends:
       file: ./backend/integrations_service/docker-compose.base.yml
@@ -94,7 +122,7 @@ services:
       TIKTOK_REDIRECT_URI: https://concrete-troll-brightly.ngrok-free.app/integrations/tiktok/callback
       TIKTOK_CLIENT_KEY: sbawgik9wknh769zea
       TIKTOK_CLIENT_SECRET: ntnIeAlvnKPC6tTIXTQpsi4kws3D7ewv
-    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --root-path /integrations
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8001 --root-path /integrations
     networks:
       - integrations-service-network
       - internal-network

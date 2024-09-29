@@ -13,6 +13,10 @@ class UsersRepository:
 		self._session = session
 
 
+	def find_by_id(self, user_id: str) -> Union[User, None]:
+		return self._session.query(User).filter(User.id == user_id).first()
+
+
 	def find_by_email(self, email: str) -> Union[User, None]:
 		return self._session.query(User).filter(User.email == email).first()
 
