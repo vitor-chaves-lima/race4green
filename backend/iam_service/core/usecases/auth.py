@@ -1,6 +1,6 @@
 from core.db.repositories.users import UsersRepository
 from core.exceptions import InvalidPasswordConfirmException, EmailExistsException, EmailNotFoundException, \
-	InvalidCredentialsException, InvalidRefreshTokenException
+	InvalidCredentialsException, InvalidRefreshTokenException, InvalidAccessTokenException
 from core.models.user import User
 from core.utils.token import TokenUtils
 
@@ -66,3 +66,21 @@ class AuthUseCase:
 		access_token_expire = 900
 
 		return access_token, access_token_expire
+
+
+	def validate_access_token(self, access_token: str) -> str:
+		is_access_token_valid, user_id = self._token_utils.validate_access_token(access_token)
+
+		if not is_access_token_valid:
+			raise InvalidAccessTokenException()
+
+		return user_id
+
+
+	def get_user_data(self, user_id: str) -> (str, int, int, int):
+		user = self._users_repository.find_by_id(user_id=user_id)
+
+		return (user.character_gender,
+				user.character_hair_index,
+				user.character_shirt_index,
+				user.character_pants_index)

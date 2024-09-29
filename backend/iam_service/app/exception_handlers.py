@@ -97,7 +97,7 @@ async def expired_access_token_exception_handler(_: Request, exc: ExpiredAccessT
 
 async def invalid_access_token_exception_handler(_: Request, exc: InvalidAccessTokenException):
     return JSONResponse(
-        status_code=status.HTTP_400_BAD_REQUEST,
+        status_code=status.HTTP_401_UNAUTHORIZED,
         content={
             "message": "Access token inválido",
             "error": {
