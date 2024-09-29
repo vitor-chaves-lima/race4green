@@ -1,6 +1,11 @@
 /*----------------- IMPORTS -----------------*/
 
-import { Outlet, RouteObject, createBrowserRouter } from "react-router-dom";
+import {
+	Navigate,
+	Outlet,
+	RouteObject,
+	createBrowserRouter,
+} from "react-router-dom";
 import { icons } from "lucide-react";
 
 import { Toaster } from "@/components/ui/toaster.tsx";
@@ -28,6 +33,7 @@ import {
 import { AuthLayout } from "@/layouts/Auth.layout.tsx";
 import { SignInPage } from "@/pages/auth/sign-in.page.tsx";
 import { signInAction } from "@/actions/auth.actions.ts";
+
 import { authLoader, dashboardLoader } from "@/loaders/auth.loaders.ts";
 
 /*--------------- INTERFACES ----------------*/
@@ -163,7 +169,15 @@ const router = createBrowserRouter([
 				<Toaster />
 			</>
 		),
-		children: [apiRoutes, authRoutes, dashboardRoutes],
+		children: [
+			{
+				index: true,
+				element: <Navigate to="/dashboard" replace={true}></Navigate>,
+			},
+			apiRoutes,
+			authRoutes,
+			dashboardRoutes,
+		],
 	},
 ]);
 
