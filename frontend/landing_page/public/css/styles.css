@@ -339,3 +339,57 @@ nav > .app-buttons {
 	padding: 50px;
 	gap: 60px;
 }
+
+.impacts-content {
+	display: flex;
+	flex-direction: column;
+	padding-block: 70px;
+	gap: 75px;
+}
+
+.impacts-content > .section-header {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: end;
+}
+
+.impacts-content > .section-header > h2 {
+	font-size: 2.75rem;
+}
+
+.impacts-content > .section-header > p {
+	font-size: 1.25rem;
+}
+
+.impacts-content > .impacts-items {
+	display: flex;
+	gap: 41px;
+}
+
+.impacts-content > .impacts-items > .column {
+	display: flex;
+	flex-direction: column;
+	width: 50%;
+	gap: 50px;
+}
+
+.impacts-content > .impacts-items > .column > div {
+	display: flex;
+	flex-direction: column;
+	gap: 40px;
+}
+
+.impacts-content > .impacts-items > .column > div > h3 {
+	font-size: 1.5rem;
+}
+
+.impacts-content > .impacts-items > .column > div > p {
+	font-size: 1.25rem;
+}
+
+.impacts-content > .impacts-items > .divider {
+	width: 1px;
+	background-color: #666;
+	height: auto;
+}
