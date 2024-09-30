@@ -4,19 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8db9e856-6753-42ef-8f11-40e403f58aea" name="Changes" comment="Adicionando dockerfile para a landing page">
-      <change afterPath="$PROJECT_DIR$/public/fonts/OpenSans-Bold.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/OpenSans-BoldItalic.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/OpenSans-ExtraBold.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/OpenSans-ExtraBoldItalic.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/OpenSans-Italic.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/OpenSans-Light.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/OpenSans-LightItalic.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/OpenSans-Medium.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/OpenSans-MediumItalic.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/OpenSans-Regular.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/OpenSans-SemiBold.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/OpenSans-SemiBoldItalic.ttf" afterDir="false" />
+    <list default="true" id="8db9e856-6753-42ef-8f11-40e403f58aea" name="Changes" comment="Corrigindo header">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/styles.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.html" afterDir="false" />
@@ -53,7 +41,7 @@
   "keyToString": {
     "JavaScript Debug.index.html.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "R4G-72-corrigir-landing-paing",
+    "git-widget-placeholder": "R4G-72-corrigir-landing-page",
     "last_opened_file_path": "C:/Users/vs1321/Documents/STUDY/race4green/frontend/landing_page",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -97,8 +85,17 @@
       <workItem from="1727657465224" duration="438000" />
       <workItem from="1727661880916" duration="4293000" />
       <workItem from="1727667710228" duration="1721000" />
-      <workItem from="1727692263326" duration="6189000" />
+      <workItem from="1727692263326" duration="8512000" />
     </task>
+    <task id="LOCAL-00001" summary="Corrigindo header">
+      <option name="closed" value="true" />
+      <created>1727699239625</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1727699239625</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -117,6 +114,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Adicionando dockerfile para a landing page" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adicionando dockerfile para a landing page" />
+    <MESSAGE value="Corrigindo header" />
+    <option name="LAST_COMMIT_MESSAGE" value="Corrigindo header" />
   </component>
 </project>
