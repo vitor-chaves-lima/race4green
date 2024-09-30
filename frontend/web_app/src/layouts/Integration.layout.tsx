@@ -3,6 +3,7 @@
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { FC } from "react";
 
 /*--------------- INTERFACES ----------------*/
 
@@ -14,7 +15,7 @@ interface IntegrationLayoutCardProps {
 
 /*---------------- COMPONENT ----------------*/
 
-const IntegrationLayout: React.FC<IntegrationLayoutCardProps> = ({
+const IntegrationLayout: FC<IntegrationLayoutCardProps> = ({
 	title,
 	backButtonPath,
 	subRouteTitles = new Map(),

@@ -11,7 +11,7 @@ import { icons } from "lucide-react";
 import { Toaster } from "@/components/ui/toaster.tsx";
 
 import { DashboardLayout } from "@/layouts/Dashboard.layout";
-import { IntegrationLayout } from "@/layouts/IntegrationLayout";
+import { IntegrationLayout } from "@/layouts/Integration.layout.tsx";
 
 import {
 	TikTokIntegrationManageErrorElement,
