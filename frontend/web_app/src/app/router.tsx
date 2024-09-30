@@ -32,7 +32,7 @@ import {
 } from "@/app/loaders/tikTokIntegration.loaders";
 import { AuthLayout } from "@/app/layouts/Auth.layout.tsx";
 import { SignInPage } from "@/app/pages/auth/sign-in.page.tsx";
-import { signInAction } from "@/app/actions/auth.actions.ts";
+import { signInAction, signUpAction } from "@/app/actions/auth.actions.ts";
 
 import {
 	authLoader,
@@ -41,6 +41,7 @@ import {
 } from "@/app/loaders/auth.loaders.ts";
 import { CollectiblesPage } from "@/app/pages/Collectibles.tsx";
 import { ProfilePage } from "@/app/pages/Profile.page.tsx";
+import { SignUpPage } from "@/app/pages/auth/sign-up.page.tsx";
 
 /*--------------- INTERFACES ----------------*/
 
@@ -135,8 +136,16 @@ const authRoutes: RouteObject = {
 	),
 	children: [
 		{
+			index: true,
+			element: <Navigate to="sign-up" replace={true}></Navigate>,
+		},
+		{
 			path: "sign-in",
 			element: <SignInPage />,
+		},
+		{
+			path: "sign-up",
+			element: <SignUpPage />,
 		},
 	],
 };
@@ -172,6 +181,10 @@ const apiRoutes: RouteObject = {
 				{
 					path: "sign-in",
 					action: signInAction,
+				},
+				{
+					path: "sign-up",
+					action: signUpAction,
 				},
 			],
 		},

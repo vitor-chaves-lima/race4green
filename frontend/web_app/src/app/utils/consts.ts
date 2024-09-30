@@ -1,15 +1,16 @@
 function ensureHttps(url: string) {
-	if (!/^https?:\/\//i.test(url)) {
-		return `https://${url}`;
+	if (/^localhost(:\d+)?$/i.test(url)) {
+		return new URL(`http://${url}`);
 	}
-	return url;
+
+	if (!/^https?:\/\//i.test(url)) {
+		return new URL(`https://${url}`);
+	}
 }
 
 /*---------------- CONST'S ------------------*/
 
-const API_GATEWAY_URL = new URL(
-	ensureHttps(import.meta.env.VITE_API_GATEWAY_URL),
-);
+const API_GATEWAY_URL = ensureHttps(import.meta.env.VITE_API_GATEWAY_URL);
 
 /*----------------- EXPORTS -----------------*/
 
