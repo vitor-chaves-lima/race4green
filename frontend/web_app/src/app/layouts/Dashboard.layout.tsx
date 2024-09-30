@@ -4,7 +4,8 @@ import React from "react";
 
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { MenuItem, menuItems } from "@/app/router.tsx";
-import { icons } from "lucide-react";
+
+import { LogOutIcon, icons } from "lucide-react";
 
 import {
 	Dialog,
@@ -23,12 +24,6 @@ import { clearTokens } from "@/app/utils/auth.ts";
 
 interface NavMenuitemProps extends Omit<MenuItem, "selectCheck"> {
 	selected: boolean;
-}
-
-interface NavMenuActionProps {
-	icon: keyof typeof icons;
-	label: string;
-	onClick?: () => void;
 }
 
 /*-------------- SUBCOMPONENTS --------------*/
@@ -57,26 +52,6 @@ const NavMenuLink: React.FC<NavMenuitemProps> = ({
 				<Icon className="h-6 w-6" />
 				<span className="hidden lg:block">{label}</span>
 			</Link>
-		</li>
-	);
-};
-
-const NavMenuAction: React.FC<NavMenuActionProps> = ({
-	icon,
-	label,
-	onClick,
-}: NavMenuActionProps) => {
-	const Icon = icons[icon];
-
-	return (
-		<li className="flex items-center w-full gap-4 border-2 border-transparent rounded-xl transition-all hover:bg-foreground/5">
-			<button
-				className="flex items-center justify-center w-full gap-4 py-3 px-4 lg:justify-start"
-				onClick={onClick}
-			>
-				<Icon className="h-6 w-6" />
-				<span className="hidden lg:block">{label}</span>
-			</button>
 		</li>
 	);
 };
@@ -112,38 +87,43 @@ const LogOut = () => {
 	};
 
 	return (
-		<Dialog modal>
-			<DialogTrigger asChild>
-				<NavMenuAction icon="LogOut" label="Sair" />
-			</DialogTrigger>
-			<DialogContent
-				onInteractOutside={(e) => {
-					e.preventDefault();
-				}}
-			>
-				<DialogHeader>
-					<DialogTitle>Desconectar?</DialogTitle>
-				</DialogHeader>
-				<DialogDescription className="text-md my-3 text-foreground">
-					Você será desconectado da plataforma. Deseja continuar?
-				</DialogDescription>
-				<DialogFooter>
-					<DialogClose asChild>
-						<Button variant="secondary" className="rounded">
-							Cancelar
-						</Button>
-					</DialogClose>
+		<li className="flex items-center w-full gap-4 border-2 border-transparent rounded-xl transition-all hover:bg-foreground/5">
+			<Dialog modal>
+				<DialogTrigger asChild>
+					<button className="flex items-center justify-center w-full gap-4 py-3 px-4 lg:justify-start">
+						<LogOutIcon className="h-6 w-6" />
+						<span className="hidden lg:block">Logout</span>
+					</button>
+				</DialogTrigger>
+				<DialogContent
+					onInteractOutside={(e) => {
+						e.preventDefault();
+					}}
+				>
+					<DialogHeader>
+						<DialogTitle>Desconectar?</DialogTitle>
+					</DialogHeader>
+					<DialogDescription className="text-md my-3 text-foreground">
+						Você será desconectado da plataforma. Deseja continuar?
+					</DialogDescription>
+					<DialogFooter>
+						<DialogClose asChild>
+							<Button variant="secondary" className="rounded">
+								Cancelar
+							</Button>
+						</DialogClose>
 
-					<Button
-						variant="destructive"
-						className="rounded"
-						onClick={handledDisconnectButtonClick}
-					>
-						Desconectar
-					</Button>
-				</DialogFooter>
-			</DialogContent>
-		</Dialog>
+						<Button
+							variant="destructive"
+							className="rounded"
+							onClick={handledDisconnectButtonClick}
+						>
+							Desconectar
+						</Button>
+					</DialogFooter>
+				</DialogContent>
+			</Dialog>
+		</li>
 	);
 };
 
@@ -154,7 +134,7 @@ const DashboardLayout: React.FC = () => {
 		<div className="grid min-h-screen w-full sm:grid-cols-[100px_1fr] lg:grid-cols-[280px_1fr]">
 			<div className="border-r hidden sm:block">
 				<div className="flex h-full max-h-screen flex-col gap-7 p-4 items-center lg:items-start">
-					<a href="/public" className="font-bold text-2xl">
+					<a href="/" className="font-bold text-2xl">
 						<span className="hidden lg:block pl-4">
 							Race 4 Green
 						</span>

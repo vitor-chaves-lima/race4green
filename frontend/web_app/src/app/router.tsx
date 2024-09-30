@@ -34,8 +34,13 @@ import { AuthLayout } from "@/app/layouts/Auth.layout.tsx";
 import { SignInPage } from "@/app/pages/auth/sign-in.page.tsx";
 import { signInAction } from "@/app/actions/auth.actions.ts";
 
-import { authLoader, dashboardLoader } from "@/app/loaders/auth.loaders.ts";
+import {
+	authLoader,
+	dashboardLoader,
+	userDataLoader,
+} from "@/app/loaders/auth.loaders.ts";
 import { CollectiblesPage } from "@/app/pages/Collectibles.tsx";
+import { ProfilePage } from "@/app/pages/Profile.page.tsx";
 
 /*--------------- INTERFACES ----------------*/
 
@@ -47,6 +52,12 @@ interface MenuItem {
 }
 
 /*----------------- ROUTES -----------------*/
+
+const profileRoute: RouteObject = {
+	path: "profile",
+	loader: userDataLoader,
+	element: <ProfilePage />,
+};
 
 const collectiblesRoute: RouteObject = {
 	path: "collectibles",
@@ -103,7 +114,15 @@ const dashboardRoutes: RouteObject = {
 			<DashboardLayout />
 		</>
 	),
-	children: [collectiblesRoute, integrationsRoute],
+	children: [
+		{
+			index: true,
+			element: <Navigate to="profile" replace={true}></Navigate>,
+		},
+		profileRoute,
+		collectiblesRoute,
+		integrationsRoute,
+	],
 };
 
 const authRoutes: RouteObject = {
@@ -185,6 +204,13 @@ const router = createBrowserRouter([
 /*--------------- MENU ITEMS ---------------*/
 
 const menuItems: MenuItem[] = [
+	{
+		icon: "User",
+		label: "Perfil",
+		to: `${profileRoute.path}`,
+		selectCheck: (pathname: string) =>
+			pathname.includes(`${profileRoute.path}`),
+	},
 	{
 		icon: "BookHeart",
 		label: "Colecionáveis",
