@@ -9,41 +9,62 @@
 
 <body>
     <header>
-        <nav class="navbar">
-            <a class="logo" href="#">Race4Green</a>
-            <ul class="nav-links">
-                <button class="challenges-btn" onclick="window.location.href='#challenges';">Desafios</button>
-                <button class="initiative-btn" onclick="window.location.href='#sus-s';">Iniciativas</button>
-                <button class="impact-btn" onclick="window.location.href='#impact-f';">Impacto</button>
-            </ul>
-            <div class="auth-buttons">
-                <button id="footer-c" class="btn create-account" onclick="window.location.href='https://app.race4green.com/auth/sign-up';">
-                    Criar uma conta
-                </button>
-                    <button id="footer-l" class="btn_login" onclick="window.location.href='https://app.race4green.com/auth/sign-in';">
-                    Login
-                </button>
-            </div>
-        </nav>
+		<div class="navbar">
+			<div class="container">
+				<nav>
+					<a class="logo" href="#"><h1>Race4Green</h1></a>
+
+					<ul>
+						<li><a href="#challenges">Desafios</a></li>
+						<li><a href="#initiatives">Iniciativas</a></li>
+						<li><a href="#impact">Impacto</a></li>
+					</ul>
+
+					<div class="app-buttons">
+						<a class="btn-primary" href="https://app.race4green.com/auth/sign-up">
+							Criar uma conta
+						</a>
+
+						<a class="btn-secondary" href="https://app.race4green.com/auth/sign-in">
+							Login
+						</a>
+					</div>
+				</nav>
+			</div>
+		</div>
+
+		<section class="hero">
+			<div class="container">
+				<div class="hero-content">
+					<div class="text">
+						<div class="call-to-action">
+							<h1>Acelere para um futuro sustentável</h1>
+							<p>Faça parte de uma comunidade comprometida com o planeta e com corridas eletrizantes.</p>
+						</div>
+
+						<div class="app-buttons">
+							<a href="https://app.race4green.com/auth/sign-up" class="btn-primary sign-up-link">Quero participar</a>
+							<a href="https://www.youtube.com/watch?v=26i3qSu0lak" class="video-link">
+								<div class="btn-primary">
+									<img src="/public/assets/images/Icon.png">
+								</div>
+
+								<div class="video-icon" href="https://www.youtube.com/watch?v=26i3qSu0lak">Assistir vídeo</div>
+							</a>
+						</div>
+					</div>
+
+					<div class="image">
+						<img src='/public/assets/images/car-formula-e.png' alt="Carro de Fórmula E">
+					</div>
+				</div>
+			</div>
+		</section>
+		</div>
     </header>
 
     <main>
-        <section class="hero">
-            <div class="hero-content">
-                <h1>Acelere para um futuro sustentável</h1>
-                <p>Faça parte de uma comunidade comprometida com o planeta e com corridas eletrizantes.</p>
-                <div class="hero-buttons">
-                    <a href="https://app.race4green.com/auth/sign-up" class="btn primary-btn">Quero participar</a>
-                    <a href="https://www.youtube.com/watch?v=26i3qSu0lak" class="btn secondary-btn">
-                        <img src="/public/assets/images/Icon.png">
-                    </a>
-                    <a class="video-icon" href="https://www.youtube.com/watch?v=26i3qSu0lak">Assistir vídeo</a>
-                </div>
-            </div>
-            <div class="hero-image">
-                <img src='/public/assets/images/car-formula-e.png' alt="Carro de Fórmula E">
-            </div>
-        </section>
+
     </main>
 
     <section id="challenges">
@@ -134,7 +155,7 @@
                             sustentabilidade
                             para maximizar o impacto positivo da Fórmula E.</p>
                     </div>
-                    <img src="/public/assets/images/gear.png" alt="gear">    
+                    <img src="/public/assets/images/gear.png" alt="gear">
                 </div>
             </div>
         </div>
