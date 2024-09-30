@@ -15,8 +15,8 @@ import {
 	CallbackValidationError,
 	HttpRequestError,
 	InvalidCallbackDataError,
-} from "@/lib/exceptions.ts";
-import { TikTokCallbackLoaderReturn } from "@/loaders/tikTokIntegration.loaders.ts";
+} from "@/app/utils/exceptions.ts";
+import { TikTokCallbackLoaderReturn } from "@/app/loaders/tikTokIntegration.loaders.ts";
 
 /*-------------- SUBCOMPONENTS --------------*/
 

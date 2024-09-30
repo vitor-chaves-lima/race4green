@@ -2,7 +2,7 @@
 
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/app/components/ui/button.tsx";
 import { FC } from "react";
 
 /*--------------- INTERFACES ----------------*/

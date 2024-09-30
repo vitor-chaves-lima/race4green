@@ -1,7 +1,7 @@
 /*----------------- IMPORTS -----------------*/
 
 import { LoaderFunction, redirect } from "react-router-dom";
-import { isAuthenticated } from "@/lib/auth.ts";
+import { isAuthenticated } from "@/app/utils/auth.ts";
 
 /*----------------- LOADERS -----------------*/
 

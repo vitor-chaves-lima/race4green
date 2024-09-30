@@ -3,7 +3,7 @@
 import React from "react";
 
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
-import { MenuItem, menuItems } from "@/app/router";
+import { MenuItem, menuItems } from "@/app/router.tsx";
 import { icons } from "lucide-react";
 
 import {
@@ -15,9 +15,9 @@ import {
 	DialogHeader,
 	DialogTitle,
 	DialogTrigger,
-} from "@/components/ui/dialog.tsx";
-import { Button } from "@/components/ui/button.tsx";
-import { clearTokens } from "@/lib/auth.ts";
+} from "@/app/components/ui/dialog.tsx";
+import { Button } from "@/app/components/ui/button.tsx";
+import { clearTokens } from "@/app/utils/auth.ts";
 
 /*-------------- INTERFACES --------------*/
 
@@ -154,7 +154,7 @@ const DashboardLayout: React.FC = () => {
 		<div className="grid min-h-screen w-full sm:grid-cols-[100px_1fr] lg:grid-cols-[280px_1fr]">
 			<div className="border-r hidden sm:block">
 				<div className="flex h-full max-h-screen flex-col gap-7 p-4 items-center lg:items-start">
-					<a href="/" className="font-bold text-2xl">
+					<a href="/public" className="font-bold text-2xl">
 						<span className="hidden lg:block pl-4">
 							Race 4 Green
 						</span>

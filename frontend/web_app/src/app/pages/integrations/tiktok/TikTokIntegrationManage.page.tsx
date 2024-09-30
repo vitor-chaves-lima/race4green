@@ -16,9 +16,9 @@ import {
 import {
 	TikTokLoaderReturn,
 	TikTokVideo,
-} from "@/loaders/tikTokIntegration.loaders.ts";
-import { Button } from "@/components/ui/button.tsx";
-import { useToast } from "@/components/hooks/use-toast.ts";
+} from "@/app/loaders/tikTokIntegration.loaders.ts";
+import { Button } from "@/app/components/ui/button.tsx";
+import { useToast } from "@/app/components/hooks/use-toast.ts";
 
 import {
 	Dialog,
@@ -29,9 +29,12 @@ import {
 	DialogHeader,
 	DialogTitle,
 	DialogTrigger,
-} from "@/components/ui/dialog.tsx";
+} from "@/app/components/ui/dialog.tsx";
 
-import { HttpRequestError, IntegrationInitError } from "@/lib/exceptions.ts";
+import {
+	HttpRequestError,
+	IntegrationInitError,
+} from "@/app/utils/exceptions.ts";
 import { ReloadIcon } from "@radix-ui/react-icons";
 
 /*------------- ERROR HANDLING --------------*/

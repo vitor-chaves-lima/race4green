@@ -8,33 +8,34 @@ import {
 } from "react-router-dom";
 import { icons } from "lucide-react";
 
-import { Toaster } from "@/components/ui/toaster.tsx";
+import { Toaster } from "@/app/components/ui/toaster.tsx";
 
-import { DashboardLayout } from "@/layouts/Dashboard.layout";
-import { IntegrationLayout } from "@/layouts/Integration.layout.tsx";
+import { DashboardLayout } from "@/app/layouts/Dashboard.layout";
+import { IntegrationLayout } from "@/app/layouts/Integration.layout.tsx";
 
 import {
 	TikTokIntegrationManageErrorElement,
 	TikTokIntegrationManagePage,
-} from "@/pages/integrations/tiktok/TikTokIntegrationManage.page";
-import { IntegrationsIndexPage } from "@/pages/integrations/Index.page";
-import { TikTokIntegrationCallbackPage } from "@/pages/integrations/tiktok/TikTokIntegrationCallback.page.tsx";
+} from "@/app/pages/integrations/tiktok/TikTokIntegrationManage.page";
+import { IntegrationsIndexPage } from "@/app/pages/integrations/Index.page";
+import { TikTokIntegrationCallbackPage } from "@/app/pages/integrations/tiktok/TikTokIntegrationCallback.page.tsx";
 
 import {
 	tikTokIntegrationDisconnectAction,
 	tikTokIntegrationInitAction,
 	tikTokIntegrationSyncAction,
-} from "@/actions/tikTokIntegration.actions";
+} from "@/app/actions/tikTokIntegration.actions";
 
 import {
 	tikTokIntegrationCallbackLoader,
 	tikTokIntegrationLoader,
-} from "@/loaders/tikTokIntegration.loaders";
-import { AuthLayout } from "@/layouts/Auth.layout.tsx";
-import { SignInPage } from "@/pages/auth/sign-in.page.tsx";
-import { signInAction } from "@/actions/auth.actions.ts";
+} from "@/app/loaders/tikTokIntegration.loaders";
+import { AuthLayout } from "@/app/layouts/Auth.layout.tsx";
+import { SignInPage } from "@/app/pages/auth/sign-in.page.tsx";
+import { signInAction } from "@/app/actions/auth.actions.ts";
 
-import { authLoader, dashboardLoader } from "@/loaders/auth.loaders.ts";
+import { authLoader, dashboardLoader } from "@/app/loaders/auth.loaders.ts";
+import { CollectiblesPage } from "@/app/pages/Collectibles.tsx";
 
 /*--------------- INTERFACES ----------------*/
 
@@ -49,7 +50,7 @@ interface MenuItem {
 
 const collectiblesRoute: RouteObject = {
 	path: "collectibles",
-	element: <h1>Colecionáveis</h1>,
+	element: <CollectiblesPage />,
 };
 
 const integrationsRoute: RouteObject = {

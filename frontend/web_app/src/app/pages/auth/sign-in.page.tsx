@@ -4,11 +4,11 @@ import React, { FormEvent, useState } from "react";
 
 import FormulaECarImage from "@/assets/images/formula-e-car.png";
 
-import { Button } from "@/components/ui/button.tsx";
-import { Input } from "@/components/ui/input";
+import { Button } from "@/app/components/ui/button.tsx";
+import { Input } from "@/app/components/ui/input.tsx";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { useFetcher } from "react-router-dom";
-import { validateEmail } from "@/lib/regex.ts";
+import { validateEmail } from "@/app/utils/regex.ts";
 
 /*---------------- COMPONENT ----------------*/
 

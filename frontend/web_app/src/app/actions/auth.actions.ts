@@ -2,9 +2,12 @@
 
 import { ActionFunction, ActionFunctionArgs, redirect } from "react-router-dom";
 
-import { HttpRequestError, IntegrationInitError } from "@/lib/exceptions.ts";
-import { API_GATEWAY_URL } from "@/lib/consts.ts";
-import { setTokens } from "@/lib/auth.ts";
+import {
+	HttpRequestError,
+	IntegrationInitError,
+} from "@/app/utils/exceptions.ts";
+import { API_GATEWAY_URL } from "@/app/utils/consts.ts";
+import { setTokens } from "@/app/utils/auth.ts";
 
 /*---------------- ENDPOINTS ----------------*/
 

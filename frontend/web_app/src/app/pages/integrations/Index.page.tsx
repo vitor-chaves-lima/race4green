@@ -4,9 +4,9 @@ import React, { useEffect } from "react";
 
 import { Link, useLocation } from "react-router-dom";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@/app/components/ui/button.tsx";
 import TikTokLogo from "@/assets/logos/tiktok.svg";
-import { useToast } from "@/components/hooks/use-toast.ts";
+import { useToast } from "@/app/components/hooks/use-toast.ts";
 
 /*--------------- INTERFACES ----------------*/
 

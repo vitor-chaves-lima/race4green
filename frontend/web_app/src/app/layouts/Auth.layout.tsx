@@ -11,7 +11,7 @@ const AuthLayout: React.FC = () => {
 		<div className="flex flex-col min-h-screen w-full">
 			<div className="border-b h-full">
 				<div className="flex flex-col gap-7 p-4 justify-between">
-					<a href="/" className="font-bold text-2xl">
+					<a href="/public" className="font-bold text-2xl">
 						<span className="pl-4">Race 4 Green</span>
 					</a>
 				</div>

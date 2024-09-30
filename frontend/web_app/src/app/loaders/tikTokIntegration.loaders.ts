@@ -7,10 +7,10 @@ import {
 	CallbackValidationError,
 	HttpRequestError,
 	InvalidCallbackDataError,
-} from "@/lib/exceptions.ts";
+} from "@/app/utils/exceptions.ts";
 
-import { API_GATEWAY_URL } from "@/lib/consts.ts";
-import { getAccessToken } from "@/lib/auth.ts";
+import { API_GATEWAY_URL } from "@/app/utils/consts.ts";
+import { getAccessToken } from "@/app/utils/auth.ts";
 
 /*------------------ TYPES ------------------*/
 
