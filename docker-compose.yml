@@ -12,6 +12,14 @@ networks:
       internal: true
 
 services:
+
+  web-app:
+    extends:
+      file: ./frontend/web_app/docker-compose.base.yml
+      service: web-app
+    ports:
+      - "5001:80"
+
   landing-page:
     extends:
       file: ./frontend/landing_page/docker-compose.base.yml
