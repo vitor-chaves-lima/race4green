@@ -17,6 +17,7 @@ const SignUpPage: React.FC = () => {
 
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const [passwordConfirm, setPasswordConfirm] = useState("");
 
 	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -25,10 +26,11 @@ const SignUpPage: React.FC = () => {
 			{
 				email,
 				password,
+				passwordConfirm,
 			},
 			{
 				method: "POST",
-				action: "/api/iam/sign-in",
+				action: "/api/iam/sign-up",
 				encType: "application/json",
 			},
 		);
@@ -46,11 +48,11 @@ const SignUpPage: React.FC = () => {
 					onSubmit={handleSubmit}
 				>
 					<div className="flex flex-col items-center gap-3">
-						<h1 className="text-2xl font-bold">
-							Bem-vindo de volta!
-						</h1>
+						<h1 className="text-2xl font-bold">Seja bem-vindo!</h1>
 
-						<h2 className="text-xl">Pronto para continuar?</h2>
+						<h2 className="text-xl">
+							Preencha o formulário para criar sua conta
+						</h2>
 					</div>
 
 					<div className="flex flex-col gap-8">
@@ -68,6 +70,15 @@ const SignUpPage: React.FC = () => {
 							className="text-xl py-6 px-5 rounded border-white text-white"
 							disabled={fetcher.state === "submitting"}
 						/>
+						<Input
+							type="password"
+							placeholder="Confirmação de senha"
+							onChange={(e) =>
+								setPasswordConfirm(e.currentTarget.value)
+							}
+							className="text-xl py-6 px-5 rounded border-white text-white"
+							disabled={fetcher.state === "submitting"}
+						/>
 					</div>
 
 					<Button
@@ -75,7 +86,8 @@ const SignUpPage: React.FC = () => {
 						disabled={
 							fetcher.state === "submitting" ||
 							!validateEmail(email) ||
-							password.length < 8
+							password.length < 8 ||
+							password != passwordConfirm
 						}
 						className="text-xl py-6 px-5 rounded"
 					>
