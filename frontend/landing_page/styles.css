@@ -32,7 +32,7 @@ header {
     text-decoration: none;
 }
 
-.desafios-btn {
+.challenges-btn {
     border: none;
     background-color: #0E110F;
     color: white;
@@ -41,7 +41,7 @@ header {
     font-weight: bold;
 }
 
-.iniciativa-btn {
+.initiative-btn {
     border: none;
     background-color: #0E110F;
     color: white;
@@ -50,7 +50,7 @@ header {
     font-weight: bold;
 }
 
-.impacto-btn {
+.impact-btn {
     border: none;
     background-color: #0E110F;
     color: white;
@@ -242,7 +242,7 @@ main {
 }
 
 
-.sustentabilidade-section {
+.sustainability-section {
     padding: 50px 20px;
     background-color: #0E110F;
     color: white;
@@ -251,23 +251,23 @@ main {
     margin-bottom: 200px;
 }
 
-.sustentabilidade-section h2 {
+.sustainability-section h2 {
     font-size: 36px;
     margin-bottom: 10px;
 }
 
-.sustentabilidade-section p {
+.sustainability-section p {
     font-size: 18px;
     margin-bottom: 40px;
     color: #b3b3b3;
 }
 
-.sustentabilidade-grid {
+.sustainability-grid {
     display: grid;
     gap: 20px
 }
 
-.sustentabilidade-card-1 {
+.sustainability-card-1 {
     display: flex;
     width: 100%;
     justify-content: left;
@@ -278,19 +278,19 @@ main {
     border: 1px solid white;
 }
 
-.sustentabilidade-card-1 img{
+.sustainability-card-1 img{
     width: 25%;
     margin-left: 15%;
     min-width: 100px;
 }
 
-.sustentabilidade-card-1 .sustentabilidade-title{
+.sustainability-card-1 .sustainability-title{
     width: 42%;
     margin: 0;
     margin-left: 10%;
 }
 
-.sustentabilidade-card-2 {
+.sustainability-card-2 {
     width: 33%;
     display: flex;
     justify-content: center;
@@ -303,12 +303,12 @@ main {
 }
 
 
-.sustentabilidade-card-2 img{
+.sustainability-card-2 img{
     width: 40%;
     min-width: 100px;
 }
 
-.sustentabilidade-card-3 {
+.sustainability-card-3 {
     width: 55%;
     min-width: 4%;
     padding: 25px;
@@ -319,37 +319,37 @@ main {
     bottom: 37.5rem;
 }
 
-.sustentabilidade-card-3 p{
+.sustainability-card-3 p{
     text-align: left;
 }
 
-.sustentabilidade-card-3 h3 {
+.sustainability-card-3 h3 {
     text-align: left;
     font-size: 30px;
 }
 
-.sustentabilidade-card-3 img{
+.sustainability-card-3 img{
     width: 40%;
     min-width: 100px;
 }
 
-.sustentabilidade-title {
+.sustainability-title {
     display: flex;
     flex-direction: column;
     width: 80%;
     margin: 0 auto;
 }
 
-.sustentabilidade-title p{
+.sustainability-title p{
     font-size: 20px;
 }
 
-.sustentabilidade-title h3 {
+.sustainability-title h3 {
     font-size: 30px;
     margin-bottom: -5px;
 }
 
-.impacto-comparado {
+.impact-compare {
     background-color: #0E110F;
     color: white;
     padding-bottom:  100px;
@@ -357,7 +357,7 @@ main {
     border-bottom: 1px solid white;
 }
 
-.impacto-comparado h2 {
+.impact-compare h2 {
     font-size: 36px;
     margin-bottom: 10px;
     text-align: right;
@@ -370,7 +370,7 @@ main {
     text-align: right;
 }
 
-.impacto-grid {
+.impact-grid {
     display: flex;
     justify-content: center;
     gap: 50px;
@@ -378,7 +378,7 @@ main {
     margin: 0 auto;
 }
 
-.impacto-left, .impacto-right {
+.impact-left, .impact-right {
     display: flex;
     flex-direction: column;
     gap: 40px;
@@ -386,13 +386,13 @@ main {
     width: 100%;
 }
 
-.impacto-item h3 {
+.impact-item h3 {
     font-size: 24px;
     margin-bottom: 10px;
     color: #f5f5f5;
 }
 
-.impacto-item p {
+.impact-item p {
     font-size: 16px;
     line-height: 1.5;
     color: #cccccc;
@@ -461,7 +461,7 @@ footer {
         width: 100%;
     }
     
-    .sustentabilidade-card-3 {
+    .sustainability-card-3 {
         width: 49%;
         min-width: 200px;
         padding: 25px;
@@ -510,9 +510,9 @@ footer {
         justify-content: flex-start;
     }
 
-    .desafios-btn,
-    .iniciativa-btn,
-    .impacto-btn {
+    .challenges-btn,
+    .initiative-btn,
+    .impact-btn {
         text-align: center;
     }
 
@@ -599,24 +599,24 @@ footer {
 
     /*Correto*/
 
-    .sustentabilidade-section{
+    .sustainability-section{
         display: flex;
         flex-direction: column;
         min-height: 1700px;
     }
 
-    .sustentabilidade-grid{
+    .sustainability-grid{
         display: flex;
         flex-wrap: wrap;
         flex-direction: column;
     }
 
-    .sustentabilidade-title p {
+    .sustainability-title p {
         font-size: 18px;
         width: 100%;
     }
 
-    .sustentabilidade-card-1{
+    .sustainability-card-1{
         display: flex;
         justify-content: center;
         align-items: center;
@@ -624,27 +624,27 @@ footer {
         width: 100%;
     }
 
-    .sustentabilidade-card-1 p{
+    .sustainability-card-1 p{
         font-size: 14px;
     }
 
-    .sustentabilidade-card-1 h3{
+    .sustainability-card-1 h3{
         font-size: 22px;
     }
     
-    .sustentabilidade-card-1 .sustentabilidade-title{
+    .sustainability-card-1 .sustainability-title{
         width: 80%;
         margin: 0 auto;
 
     }
 
-    .sustentabilidade-card-1 img{
+    .sustainability-card-1 img{
         width: 40%;
     }
 
 
 
-    .sustentabilidade-card-2{
+    .sustainability-card-2{
         padding: 0;
         justify-content: center;
         display: flex;
@@ -653,15 +653,15 @@ footer {
         width: 100%;
     }
 
-    .sustentabilidade-card-2 .sustentabilidade-title{
+    .sustainability-card-2 .sustainability-title{
         width: 80%;
         margin: 0 auto;
     }
 
-    .sustentabilidade-card-2 img{
+    .sustainability-card-2 img{
         width: 40%;
     }
-    .sustentabilidade-card-3 {
+    .sustainability-card-3 {
         padding: 0;
         align-items: center;
         flex-direction: column;
@@ -671,36 +671,36 @@ footer {
         width: 100%;
     }
 
-    .sustentabilidade-card-3 img{
+    .sustainability-card-3 img{
         width: 40%;
     }
 
-    .sustentabilidade-card-3 .sustentabilidade-title{
+    .sustainability-card-3 .sustainability-title{
         width: 80%;
         margin: 0 auto;
     }
 
 
 
-    .impacto-comparado h2,
+    .impact-compare h2,
     .subtitle {
         text-align: center;
     }
 
-    .impacto-grid {
+    .impact-grid {
         flex-direction: column;
         align-items: center;
         gap: 30px;
     }
 
-    .impacto-left, .impacto-right {
+    .impact-left, .impacto-right {
         max-width: 100%;
     }
 
     .divider {
         display: none;
     }
-    .impacto-comparado img {
+    .impact-comparado img {
     max-width: 100px;  /* Define o tamanho máximo para a imagem */
     height: auto;  /* Mantém a proporção */
     margin: 20px auto;  /* Centraliza a imagem */
