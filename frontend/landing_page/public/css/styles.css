@@ -115,10 +115,6 @@ body {
 	color: #FFFFFF;
 }
 
-header {
-	display: inline;
-}
-
 .container {
 	padding-inline: 348px;
 }
@@ -127,7 +123,8 @@ header {
 	border-bottom: 1px solid #FFFFFF;
 	height: 78px;
 	box-sizing: border-box;
-	position: sticky;
+	position: fixed;
+	width: 100%;
 	top: 0;
 	background-color: #0E110F;
 	z-index: 99;
@@ -160,6 +157,11 @@ nav > ul {
 nav > .app-buttons {
 	display: flex;
 	gap: 20px;
+}
+
+.hero {
+	display: inline-block;
+	margin-top: 78px;
 }
 
 .hero-content {
