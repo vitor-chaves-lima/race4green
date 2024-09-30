@@ -3,9 +3,7 @@ function ensureHttps(url: string) {
 		return new URL(`http://${url}`);
 	}
 
-	if (!/^https?:\/\//i.test(url)) {
-		return new URL(`https://${url}`);
-	}
+	return new URL(url);
 }
 
 /*---------------- CONST'S ------------------*/
