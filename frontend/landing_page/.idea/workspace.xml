@@ -5,16 +5,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8db9e856-6753-42ef-8f11-40e403f58aea" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../../backend/integrations_service/app/router.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/integrations_service/app/router.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../backend/integrations_service/core/db/repositories/sync.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/integrations_service/core/db/repositories/sync.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../backend/integrations_service/core/usecases/tiktok_integration.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/integrations_service/core/usecases/tiktok_integration.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker-compose.base.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nginx.conf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../../docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Dockerfile" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/../.." value="responsividade" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
   <component name="ProjectColorInfo">{
@@ -29,8 +43,8 @@
   "keyToString": {
     "JavaScript Debug.index.html.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "R4G-51-criar-endpoint-de-listagem-de-videos",
-    "last_opened_file_path": "C:/Users/vitor/Documents/PROJETOS/race4green/frontend/landing_page",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/vs1321/Documents/STUDY/race4green/docker-compose.yml",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -39,6 +53,12 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RunManager">
+    <configuration default="true" type="docker-deploy" factoryName="dockerfile" temporary="true">
+      <deployment type="dockerfile" />
+      <method v="2" />
+    </configuration>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -57,6 +77,8 @@
       <workItem from="1727037882203" duration="867000" />
       <workItem from="1727116633524" duration="5000" />
       <workItem from="1727375533084" duration="52000" />
+      <workItem from="1727657465224" duration="438000" />
+      <workItem from="1727661880916" duration="4293000" />
     </task>
     <servers />
   </component>

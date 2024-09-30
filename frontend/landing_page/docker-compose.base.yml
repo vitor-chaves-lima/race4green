@@ -1,0 +1,3 @@
+services:
+  landing-page:
+    build: .
