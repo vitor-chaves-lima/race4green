@@ -4,17 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8db9e856-6753-42ef-8f11-40e403f58aea" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../../backend/integrations_service/app/router.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/integrations_service/app/router.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../backend/integrations_service/core/db/repositories/sync.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/integrations_service/core/db/repositories/sync.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../backend/integrations_service/core/usecases/tiktok_integration.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/integrations_service/core/usecases/tiktok_integration.py" afterDir="false" />
+    <list default="true" id="8db9e856-6753-42ef-8f11-40e403f58aea" name="Changes" comment="Finalizando footer">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Dockerfile" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/../.." value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
   <component name="ProjectColorInfo">{
@@ -25,20 +36,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "JavaScript Debug.index.html.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "R4G-51-criar-endpoint-de-listagem-de-videos",
-    "last_opened_file_path": "C:/Users/vitor/Documents/PROJETOS/race4green/frontend/landing_page",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;JavaScript Debug.index.html.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;R4G-72-corrigir-landing-page&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/vs1321/Documents/STUDY/race4green/frontend/landing_page&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\vs1321\Documents\STUDY\race4green\frontend\landing_page\public\fonts" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="docker-deploy" factoryName="dockerfile" temporary="true">
+      <deployment type="dockerfile">
+        <settings />
+      </deployment>
+      <method v="2" />
+    </configuration>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -57,7 +81,52 @@
       <workItem from="1727037882203" duration="867000" />
       <workItem from="1727116633524" duration="5000" />
       <workItem from="1727375533084" duration="52000" />
+      <workItem from="1727657465224" duration="438000" />
+      <workItem from="1727661880916" duration="4293000" />
+      <workItem from="1727667710228" duration="1721000" />
+      <workItem from="1727692263326" duration="14244000" />
     </task>
+    <task id="LOCAL-00001" summary="Corrigindo header">
+      <option name="closed" value="true" />
+      <created>1727699239625</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1727699239625</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Corrigindo section challenges">
+      <option name="closed" value="true" />
+      <created>1727701432009</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1727701432009</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Corrigindo section initiatives">
+      <option name="closed" value="true" />
+      <created>1727703787969</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1727703787969</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Corrigindo section impacts">
+      <option name="closed" value="true" />
+      <created>1727706537325</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1727706537325</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Finalizando footer">
+      <option name="closed" value="true" />
+      <created>1727714344785</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1727714344785</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -73,5 +142,14 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Adicionando dockerfile para a landing page" />
+    <MESSAGE value="Corrigindo header" />
+    <MESSAGE value="Corrigindo section challenges" />
+    <MESSAGE value="Corrigindo section initiatives" />
+    <MESSAGE value="Corrigindo section impacts" />
+    <MESSAGE value="Finalizando footer" />
+    <option name="LAST_COMMIT_MESSAGE" value="Finalizando footer" />
   </component>
 </project>

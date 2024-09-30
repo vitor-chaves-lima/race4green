@@ -12,6 +12,13 @@ networks:
       internal: true
 
 services:
+  landing-page:
+    extends:
+      file: ./frontend/landing_page/docker-compose.base.yml
+      service: landing-page
+    ports:
+      - "5000:80"
+
   gateway:
     image: kong:latest
     environment:
