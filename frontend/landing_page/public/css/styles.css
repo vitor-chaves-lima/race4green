@@ -435,3 +435,349 @@ footer {
 	flex-direction: column;
 	gap: 10px;
 }
+
+
+@media (max-width: 425px){
+
+
+	*{
+		width: 425px;
+	}
+
+	/*--------------- NAVBAR ---------------- */
+
+
+	.navbar{
+		width: 100%;
+		height: 200px;
+	}
+	.navbar .container{
+		padding: 0;
+		height: 200px;
+	}
+	nav{
+		display: flex;
+		align-items: center;
+		gap: 20px;
+		flex-direction: column;
+	}
+
+	nav .logo{
+		text-align: center;
+	}
+
+	nav > ul {
+		display:flex;
+		justify-content: center;
+		gap: 15px;
+	}
+
+	nav > ul > li{
+		width: 25%;
+		text-align: left;
+		align-content: center;
+	}
+	
+	nav > .app-buttons {
+		display: flex;
+		gap: 15px;
+		width: 80%;
+	}
+
+	/*--------------- 	HERO ---------------- */
+
+	.hero .container{
+		padding: 0;
+		height: 900px;
+	}
+
+	.hero{
+		margin-top: 250px;
+		height: 100%;
+	}
+
+	.hero-content{
+		display: flex;
+		flex-direction: column;
+	}
+
+	.text{
+		display: flex;
+		width: 100%;
+		align-items: center;
+	}
+
+	.hero-content > .text > .call-to-action > h1 {
+		width: 80%;
+		margin: 0 auto;
+		text-align: center;
+		font-size: 2rem;
+	}
+	.hero-content > .text > .call-to-action > p{
+		width: 80%;
+		margin: 0 auto;
+		font-size: 1rem;
+		text-align: center;
+	}
+	.text .app-buttons{
+		display: flex;
+		flex-direction: column;
+
+	}
+
+	.app-button > .sign-up-link{
+		width: 1px;
+		text-align: center;
+	}
+
+	.video-link {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.hero-content > .text > .app-buttons > .sign-up-link {
+		width: 40%;
+		text-align: center;
+	}
+
+	.hero-content > .text > .app-buttons > .video-link > .btn-primary {
+		width: 20%;
+		object-fit: cover;
+	}
+
+	.video-icon{
+		text-align:  center;
+	}
+
+	.hero-content > .image{
+		display: flex;
+		justify-content: center;
+	}
+
+	.hero-content > .image img{
+		width: 60%;
+	}
+
+	/*--------------- CHALLENGES ---------------- */
+ 
+	.section-header{
+		display: flex;
+		flex-direction: column;
+		text-align: center;
+	}
+
+	.challenges-content > .section-header > h2 {
+		width: 90%;
+		margin: 0 auto;
+		font-size: 2rem;
+	}
+
+	.challenges-content > .section-header > p {
+		width: 80%;
+		margin: 0 auto;
+		font-size: 1rem;
+	}
+	
+	.challenges-content {
+		padding: 0;
+	}
+
+	.challenges-content > .challenges-cards {
+		display: flex;
+		flex-direction: column;
+		gap: 24px;
+		align-items: center;
+		width: 100%;
+	}
+
+	.card{
+		align-items: center;
+		text-align: center;
+		width: 200px;
+		height: 300px;
+	}
+
+	.card p{
+		width: 200px;
+	}
+
+	.card h3{
+		width: 200px;
+	}
+
+	/*--------------- INITIATIVES ---------------- */
+	.initiatives-content{
+		height: 2000px;
+		padding-bottom: 0;
+	}
+
+	.initiatives-content > .section-header > h2 {
+		font-size: 2rem;
+		width: 90%;
+		margin: 0 auto;
+	}
+	
+	.initiatives-content > .section-header > p {
+		font-size: 1rem;
+		width: 80%;
+		margin: 0 auto;
+	}
+
+	
+	.initiatives-content > .initiatives-grid {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.initiatives-content > .initiatives-grid > .card:nth-of-type(1) {
+		width: 250px;
+		height: 500px;
+		gap: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column-reverse;
+	}
+
+	.initiatives-content > .initiatives-grid > .card:nth-of-type(1) img{
+		width: 40%;
+	}
+
+
+	
+	.initiatives-content > .initiatives-grid > .card:nth-of-type(2) {
+		width: 250px;
+		height: 500px;
+		gap: 0;
+		padding: 0;
+		display: flex;
+	}
+
+	.initiatives-content > .initiatives-grid > .card:nth-of-type(2) img{
+		width: 40%;
+	}
+
+	
+	.initiatives-content > .initiatives-grid > .card:nth-of-type(3) {
+		width: 250px;
+		height: 500px;
+		gap: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column-reverse;
+	}
+
+	.initiatives-content > .initiatives-grid > .card:nth-of-type(3) img{
+		width: 40%;
+	}
+
+	
+	/*--------------- IMPACTS ---------------- */
+
+	.impacts-content{
+		padding-top: 0;
+	}
+
+	.impacts-content > .section-header > h2 {
+		font-size: 2.5rem;
+		padding-bottom: 15px;
+		width: 90%;
+		margin: 0 auto;
+	}
+	
+	.impacts-content > .section-header > p {
+		width: 90%;
+		margin: 0 auto;
+		text-align: center;
+		font-size: 1rem;
+	}
+	
+
+	.impacts-content > .impacts-items {
+		display: flex;
+		flex-direction: column;
+		gap: 41px;
+	}
+
+	.impacts-content > .impacts-items > .column {
+		display: flex;
+		flex-direction: column;
+		width: 50%;
+		gap: 50px;
+		text-align: center;
+	}
+
+	.impacts-content > .impacts-items > .column > div > h3 {
+		font-size: 1.5rem;
+		width: 80%;
+		margin: 0 auto;
+	}
+	
+	.impacts-content > .impacts-items > .column > div > p {
+		font-size: 1rem;
+		width: 80%;
+		margin: 0 auto;
+	}
+
+	.impacts-content > .impacts-items > .divider {
+		display: block;
+	}
+
+	.container {
+		padding: 0;
+	}
+
+	/*--------------- CONTENT ---------------- */
+
+
+	.footer-content{
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+		align-content: center;
+		padding-top: 40px; 
+		padding-bottom: 40px;
+
+	}
+
+	.footer-content > div{
+		align-content: center;
+	}
+
+	.footer-content > div > ul {
+		list-style: none;
+		display: flex;
+		flex-direction: column;
+		gap: 5px;
+	}
+
+	.foooter-col h4{
+		text-align: center;
+	}
+
+	.footer-content > div > ul > li > a {
+		list-style: none;
+		text-decoration: none;
+		color: #FFFFFF;
+		text-align: center;
+	}
+
+	.footer-content > div:nth-child(1) > p {
+		text-align: center;
+		width: 80%;
+		margin: 0 auto;
+	}
+	
+	.footer-content > div:nth-child(2), .footer-content > div:nth-child(3){
+		text-align: center;
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+
+	.footer-content > div:nth-child(2) h4, .footer-content > div:nth-child(3) h4{
+		font-size: 1.25rem;
+	}
+} 
+
